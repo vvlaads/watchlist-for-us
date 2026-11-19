@@ -5,8 +5,13 @@ import { RecommendationsPage } from './pages/recommendations-page/recommendation
 import { TogetherPage } from './pages/together-page/together-page';
 import { PopularPage } from './pages/popular-page/popular-page';
 import { FriendsPage } from './pages/friends-page/friends-page';
+import { Auth } from './pages/auth/auth';
 
 export const routes: Routes = [
+    {
+        path: 'auth',
+        component: Auth
+    },
     {
         path: '',
         component: RecommendationsPage

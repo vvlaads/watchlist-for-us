@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,13 +33,6 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Movie> addMovie(@RequestPart("movie") Movie movie,
-            @RequestPart(value = "poster", required = false) MultipartFile poster) throws IOException {
-        Movie saved = movieService.addMovie(movie, poster);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
-    }
-
     @GetMapping("/popular")
     public ResponseEntity<Page<Movie>> getPopularMovies(Pageable pageable) {
         return ResponseEntity.ok(movieService.getPopularMovies(pageable));
@@ -49,6 +43,15 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getMovieById(id));
     }
 
+    @PreAuthorize("hasRole('MODERATOR')")
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<Movie> addMovie(@RequestPart("movie") Movie movie,
+            @RequestPart(value = "poster", required = false) MultipartFile poster) throws IOException {
+        Movie saved = movieService.addMovie(movie, poster);
+        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+    }
+
+    @PreAuthorize("hasRole('MODERATOR')")
     @PutMapping("/{id}")
     public ResponseEntity<Movie> updateMovie(
             @PathVariable UUID id,
@@ -57,6 +60,7 @@ public class MovieController {
         return ResponseEntity.ok(movieService.updateMovie(id, movie));
     }
 
+    @PreAuthorize("hasRole('MODERATOR')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteMovie(@PathVariable UUID id) {
         movieService.deleteMovie(id);

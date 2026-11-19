@@ -1,4 +1,7 @@
 spring:
+  config:
+    import: optional:file:.env[.properties]
+
   application:
     name: watchlist-backend
 
@@ -26,3 +29,7 @@ storage:
     secret-key: watchlist_dev_secret_change_me
     bucket: posters
     region: us-east-1
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}

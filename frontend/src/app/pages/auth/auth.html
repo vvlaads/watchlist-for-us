@@ -1,0 +1,66 @@
+<section class="auth-page">
+    @if (!isRegister) {
+    <h1>Вход</h1>
+
+    <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+        <label>
+            Электронная почта
+            <input type="email" formControlName="email">
+        </label>
+
+        <label>
+            Пароль
+            <input type="password" formControlName="password">
+        </label>
+
+        <button type="submit" [disabled]="loginForm.invalid">
+            Войти
+        </button>
+    </form>
+
+    <p>
+        Нет аккаунта?
+        <button type="button" (click)="switchMode()">
+            Зарегистрироваться
+        </button>
+    </p>
+    } @else {
+    <h1>Регистрация</h1>
+
+    <form [formGroup]="registerForm" (ngSubmit)="submitRegister()">
+        <label>
+            Имя пользователя
+            <input type="text" formControlName="username">
+        </label>
+
+        <label>
+            Электронная почта
+            <input type="email" formControlName="email">
+        </label>
+
+        <label>
+            Пароль
+            <input type="password" formControlName="password">
+        </label>
+
+        <button type="submit" [disabled]="registerForm.invalid">
+            Зарегистрироваться
+        </button>
+    </form>
+
+    <p>
+        Уже есть аккаунт?
+        <button type="button" (click)="switchMode()">
+            Войти
+        </button>
+    </p>
+    }
+
+    @if (errorMessage) {
+    <p role="alert">{{ errorMessage }}</p>
+    }
+
+    @if (successMessage) {
+    <p role="status">{{ successMessage }}</p>
+    }
+</section>
