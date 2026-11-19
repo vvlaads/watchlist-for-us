@@ -15,5 +15,17 @@
         <a routerLink="/moder" routerLinkActive="active">
             Модерация
         </a>
+
+        <div class="navigation-footer">
+            @if (authService.currentUser(); as user) {
+            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="active">
+                {{ user.username }}
+            </a>
+            } @else {
+            <a routerLink="/auth" routerLinkActive="active">
+                Войти
+            </a>
+            }
+        </div>
     </nav>
 </div>
