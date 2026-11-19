@@ -45,7 +45,7 @@ public class MovieService {
     public Movie updateMovie(UUID id, Movie newMovie) {
         Movie oldMovie = getMovieById(id);
 
-        oldMovie.setPoster(newMovie.getPoster());
+        oldMovie.setPosterKey(newMovie.getPosterKey());
         oldMovie.setName(newMovie.getName());
         oldMovie.setDescription(newMovie.getDescription());
         oldMovie.setType(newMovie.getType());
