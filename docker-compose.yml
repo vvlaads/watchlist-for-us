@@ -1,0 +1,40 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: watchlist-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: watchlist
+      POSTGRES_USER: watchlist
+      POSTGRES_PASSWORD: watchlist_dev
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: watchlist-storage
+    restart: unless-stopped
+
+    ports:
+      - "9002:9000"
+      - "9003:9001"
+
+    environment:
+      RUSTFS_ACCESS_KEY: watchlist_dev
+      RUSTFS_SECRET_KEY: watchlist_dev_secret_change_me
+      RUSTFS_ADDRESS: 0.0.0.0:9000
+      RUSTFS_CONSOLE_ADDRESS: 0.0.0.0:9001
+      RUSTFS_CONSOLE_ENABLE: "true"
+      RUSTFS_VOLUMES: /data
+
+    volumes:
+      - rustfs_data:/data
+
+volumes:
+  postgres_data:
+  rustfs_data:
