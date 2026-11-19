@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: watchlist-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/watchlist
+    username: watchlist
+    password: watchlist_dev
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    
+server:
+  port: 8080
+
+storage:
+  s3:
+    endpoint: http://localhost:9002
+    access-key: watchlist_dev
+    secret-key: watchlist_dev_secret_change_me
+    bucket: posters
+    region: us-east-1
