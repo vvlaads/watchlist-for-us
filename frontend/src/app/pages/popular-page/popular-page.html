@@ -1,0 +1,19 @@
+<div class="popular-page">
+    <h1>Популярное</h1>
+
+    <p>Количество фильмов: {{ movies().length }}</p>
+
+    <div class="popular-page__movie-list">
+        @for (m of movies(); track m.uuid) {
+        <div class="movie-card">
+            @if (m.posterKey){
+            <img [src]="posterService.getPosterUrl(m.posterKey)" [alt]="m.name" />
+            }
+            <div class="movie-card--type">{{m.type}}</div>
+            <div class="movie-card--name">{{ m.name }}</div>
+        </div>
+        }
+    </div>
+
+
+</div>
