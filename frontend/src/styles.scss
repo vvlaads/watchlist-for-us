@@ -1,39 +1,20 @@
 :root {
-    /* Основные цвета */
     --color-primary: #5dffce;
     --color-primary-hover: #42eabb;
     --color-primary-dark: #20c99b;
 
-    /* Фон и поверхности */
     --color-background: #f7f9f8;
     --color-surface: #ffffff;
     --color-surface-hover: #f0f5f3;
 
-    /* Текст */
     --color-text: #202824;
     --color-text-secondary: #78827d;
     --color-text-muted: #a0aaa5;
 
-    /* Границы */
     --color-border: #e5ebe8;
-    --color-border-focus: var(--color-primary-dark);
 
-    /* Состояния */
     --color-error: #e05252;
     --color-success: #20a879;
-
-    /* Размеры */
-    --sidebar-width: 240px;
-    --content-padding: 28px;
-
-    /* Скругления */
-    --radius-small: 6px;
-    --radius-medium: 10px;
-    --radius-large: 16px;
-
-    /* Тени */
-    --shadow-small: 0 2px 8px rgb(0 0 0 / 5%);
-    --shadow-medium: 0 4px 16px rgb(0 0 0 / 8%);
 }
 
 * {
@@ -50,8 +31,6 @@ body {
     font-size: 15px;
     line-height: 1.5;
 }
-
-/* Заголовки */
 
 h1,
 h2,
@@ -74,8 +53,6 @@ h3 {
     font-size: 18px;
 }
 
-/* Ссылки */
-
 a {
     color: inherit;
     text-decoration: none;
@@ -84,8 +61,6 @@ a {
 a:hover {
     color: var(--color-primary-dark);
 }
-
-/* Кнопки */
 
 button {
     border: none;
@@ -111,8 +86,6 @@ button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
 }
-
-/* Поля ввода */
 
 input,
 textarea,
@@ -140,15 +113,6 @@ textarea::placeholder {
     color: var(--color-text-muted);
 }
 
-/* Изображения */
-
 img {
     max-width: 100%;
-}
-
-/* Выделение текста */
-
-::selection {
-    background: var(--color-primary);
-    color: var(--color-text);
 }

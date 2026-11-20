@@ -1,24 +1,39 @@
 <div class="navigation">
+    <div class="navigation-logo">
+        <h2>
+            Watchlist for us
+        </h2>
+    </div>
+
     <nav class="navigation-container">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-            Для тебя
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+            class="navigation--link">
+            <span></span>
+            <span>
+                Для тебя
+            </span>
         </a>
 
-        <a routerLink="/together" routerLinkActive="active">
+        <a routerLink="/together" routerLinkActive="active" class="navigation--link">
             Вместе
         </a>
 
-        <a routerLink="/popular" routerLinkActive="active">
+        <a routerLink="/popular" routerLinkActive="active" class="navigation--link">
             Популярное
         </a>
 
-        <a routerLink="/moder" routerLinkActive="active">
+        <a routerLink="/moder" routerLinkActive="active" class="navigation--link">
             Модерация
         </a>
 
+        <hr>
+
         <div class="navigation-footer">
             @if (authService.currentUser(); as user) {
-            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="active">
+            <a [routerLink]="`/users/${user.uuid}/friends`" routerLinkActive="active" class="navigation--link">
+                Друзья
+            </a>
+            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="active" class="navigation--link">
                 {{ user.username }}
             </a>
             } @else {
