@@ -1,0 +1,12 @@
+.movie-page {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+    &__poster {
+        width: 20vw;
+        aspect-ratio: var(--poster-ratio);
+        border-radius: 20px;
+        border: 1px solid var(--color-border);
+    }
+}

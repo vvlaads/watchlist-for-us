@@ -1,20 +1,30 @@
 :root {
     --color-primary: #5dffce;
     --color-primary-hover: #42eabb;
+    --color-primary-transparent: rgba(93, 255, 206, 0.3);
     --color-primary-dark: #20c99b;
+    --color-primary-dark-transparent: rgba(32, 201, 155, 0.3);
 
     --color-background: #f7f9f8;
     --color-surface: #ffffff;
     --color-surface-hover: #f0f5f3;
 
-    --color-text: #202824;
+    --color-text: #202424;
     --color-text-secondary: #78827d;
     --color-text-muted: #a0aaa5;
+    --color-text-inverse: #eee;
+    --color-text-inverse-secondary: #e4e4e4;
 
-    --color-border: #e5ebe8;
+    --color-border: #dfe2e1;
 
     --color-error: #e05252;
     --color-success: #20a879;
+
+    --font-size-small: clamp(10px, 0.7vw, 16px);
+    --font-size-default: clamp(12px, 1vw, 24px);
+    --font-size-big: clamp(14px, 1.5vw, 30px);
+
+    --poster-ratio: 4/6;
 }
 
 * {
@@ -28,7 +38,7 @@ body {
     background: var(--color-background);
     color: var(--color-text);
     font-family: Arial, sans-serif;
-    font-size: 15px;
+    font-size: var(--font-size-default);
     line-height: 1.5;
 }
 
@@ -56,6 +66,11 @@ h3 {
 a {
     color: inherit;
     text-decoration: none;
+}
+
+.link {
+    text-decoration: underline;
+    color: var(--color-primary);
 
     &:hover {
         color: var(--color-primary-dark);
@@ -64,27 +79,8 @@ a {
 
 button {
     border: none;
-    border-radius: var(--radius-medium);
-    padding: 10px 16px;
-    background: var(--color-primary);
-    color: var(--color-text);
     font: inherit;
-    font-weight: 600;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
-}
-
-button:hover:not(:disabled) {
-    background: var(--color-primary-hover);
-}
-
-button:active:not(:disabled) {
-    transform: scale(0.98);
-}
-
-button:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
 }
 
 .button {
@@ -115,13 +111,10 @@ select {
     font: inherit;
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
-}
 
-input:focus,
-textarea:focus,
-select:focus {
-    border-color: var(--color-border-focus);
-    box-shadow: 0 0 0 3px rgb(32 201 155 / 12%);
+    &:focus {
+        box-shadow: 0 0 0 3px rgb(32 201 155 / 12%);
+    }
 }
 
 input::placeholder,

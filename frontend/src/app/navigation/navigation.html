@@ -6,38 +6,41 @@
     </div>
 
     <nav class="navigation-container">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        <a routerLink="/" routerLinkActive="navigation--link-active" [routerLinkActiveOptions]="{ exact: true }"
             class="navigation--link">
-            <span></span>
-            <span>
-                Для тебя
-            </span>
+            <img src="assets/icons/Star.svg" alt="" class="navigation--link-icon" />
+            <span> Для тебя </span>
         </a>
 
-        <a routerLink="/together" routerLinkActive="active" class="navigation--link">
-            Вместе
+        <a routerLink="/together" routerLinkActive="navigation--link-active" class="navigation--link">
+            <img src="assets/icons/Users.svg" alt="" class="navigation--link-icon" />
+            <span>Вместе</span>
         </a>
 
-        <a routerLink="/popular" routerLinkActive="active" class="navigation--link">
-            Популярное
+        <a routerLink="/popular" routerLinkActive="navigation--link-active" class="navigation--link">
+            <img src="assets/icons/Trending up.svg" alt="" class="navigation--link-icon" />
+            <span>Популярное</span>
         </a>
 
-        <a routerLink="/moder" routerLinkActive="active" class="navigation--link">
-            Модерация
+        <a routerLink="/moder" routerLinkActive="navigation--link-active" class="navigation--link">
+            <img src="assets/icons/Star.svg" alt="" class="navigation--link-icon" />
+            <span>Модерация</span>
         </a>
 
         <hr>
 
         <div class="navigation-footer">
             @if (authService.currentUser(); as user) {
-            <a [routerLink]="`/users/${user.uuid}/friends`" routerLinkActive="active" class="navigation--link">
+            <a [routerLink]="`/users/${user.uuid}/friends`" routerLinkActive="navigation--link-active"
+                class="navigation--link">
                 Друзья
             </a>
-            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="active" class="navigation--link">
+            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="navigation--link-active"
+                class="navigation--link">
                 {{ user.username }}
             </a>
             } @else {
-            <a routerLink="/auth" routerLinkActive="active">
+            <a routerLink="/auth" routerLinkActive="navigation--link-active">
                 Войти
             </a>
             }

@@ -6,6 +6,7 @@ import { TogetherPage } from './pages/together-page/together-page';
 import { PopularPage } from './pages/popular-page/popular-page';
 import { FriendsPage } from './pages/friends-page/friends-page';
 import { Auth } from './pages/auth/auth';
+import { MoviePage } from './pages/movie-page/movie-page';
 
 export const routes: Routes = [
     {
@@ -36,4 +37,8 @@ export const routes: Routes = [
         path: 'users/:id',
         component: ProfilePage
     },
+    {
+        path: 'movies/:id',
+        component: MoviePage
+    }
 ];

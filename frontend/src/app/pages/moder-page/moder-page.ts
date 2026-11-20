@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { MovieService } from '../../services/movie-service';
 
 @Component({
   imports: [ReactiveFormsModule],
@@ -14,7 +14,10 @@ export class ModerPage {
 
   movieForm;
 
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(
+    private fb: FormBuilder,
+    private movieService: MovieService
+  ) {
     this.movieForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(500)]],
       description: ['', [Validators.required, Validators.maxLength(2000)]],
@@ -48,22 +51,10 @@ export class ModerPage {
   submit(): void {
     if (this.movieForm.invalid) return;
 
-    const formData = new FormData();
-
-    const movie = this.movieForm.getRawValue();
-
-    formData.append(
-      'movie',
-      new Blob([JSON.stringify(movie)], {
-        type: 'application/json'
-      })
-    );
-
-    if (this.selectedFile) {
-      formData.append('poster', this.selectedFile);
-    }
-
-    this.http.post('/api/movies', formData).subscribe({
+    this.movieService.addMovie(
+      this.movieForm.getRawValue(),
+      this.selectedFile
+    ).subscribe({
       next: (response) => {
         console.log('Фильм добавлен', response);
         this.movieForm.reset();

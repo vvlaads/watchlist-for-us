@@ -1,17 +1,25 @@
 <div class="popular-page">
     <h1>Популярное</h1>
 
-    <p>Количество фильмов: {{ movies().length }}</p>
+    <p class="popular-page__description">
+        Истории, которые обсуждают все.
+    </p>
+
+    <div class="search">
+        <img src="assets/icons/search.svg" alt="">
+        <input type="search" placeholder="Поиск фильмов, аниме...">
+    </div>
+
+
+    <div class="popular-page__movie-type-list">
+        @for(type of movieTypes; track type){
+        <div>{{type}}</div>
+        }
+    </div>
 
     <div class="popular-page__movie-list">
         @for (m of movies(); track m.uuid) {
-        <div class="movie-card">
-            @if (m.posterKey){
-            <img [src]="posterService.getPosterUrl(m.posterKey)" [alt]="m.name" />
-            }
-            <div class="movie-card--type">{{m.type}}</div>
-            <div class="movie-card--name">{{ m.name }}</div>
-        </div>
+        <app-movie-card [movie]="m" />
         }
     </div>
 

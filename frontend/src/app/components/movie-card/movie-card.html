@@ -1,0 +1,25 @@
+<a class="movie-card" [class.movie-card--empty]="!movie" [routerLink]="`/movies/${movie?.uuid}`">
+    @if(movie){
+    <div class="movie-card__poster">
+        @if (movie.posterKey){
+        <img [src]="posterService.getPosterUrl(movie.posterKey)" [alt]="movie.name" class="movie-card__poster--image"
+            draggable="false" />
+        } @else {
+        <img src="assets/posters/not found.png" alt="" class="movie-card__poster--image" draggable="false" />
+        }
+        <div class="movie-card__poster--rating">
+
+        </div>
+        <div class="movie-card__poster--type" [ngStyle]="typeStyles[movie.type]">
+            {{ typeStyles[movie.type].label }}
+        </div>
+    </div>
+
+
+    <div class="movie-card__name">{{ movie.name }}</div>
+    <div class="movie-card__description">
+        <span class="movie-card__description-genre">Фантастика</span>
+        <span class="movie-card__description-year">2017</span>
+    </div>
+    }
+</a>
