@@ -56,10 +56,10 @@ h3 {
 a {
     color: inherit;
     text-decoration: none;
-}
 
-a:hover {
-    color: var(--color-primary-dark);
+    &:hover {
+        color: var(--color-primary-dark);
+    }
 }
 
 button {
@@ -85,6 +85,22 @@ button:active:not(:disabled) {
 button:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+}
+
+.button {
+    cursor: pointer;
+    width: 100%;
+    border-radius: 20px;
+    padding: 10px;
+    border: 1px solid var(--color-border);
+
+    &--primary {
+        background-color: var(--color-primary);
+
+        &:hover {
+            background-color: var(--color-primary-hover);
+        }
+    }
 }
 
 input,

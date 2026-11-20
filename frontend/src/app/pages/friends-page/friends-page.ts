@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { User } from '../../interfaces/User';
 
 @Component({
   imports: [],
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './friends-page.scss',
   templateUrl: './friends-page.html',
 })
-export class FriendsPage {}
+export class FriendsPage {
+  public friends: User[] = []
+}

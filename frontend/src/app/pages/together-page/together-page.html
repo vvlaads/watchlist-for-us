@@ -1,1 +1,23 @@
-<p>together-page works!</p>
+<h1>Посмотреть вместе</h1>
+
+<h2>Выбери друзей, с которыми хочешь подобрать совпадения</h2>
+<div class="together-page__friend-list">
+    @if(friends.length > 0){
+    @for (friend of friends; track friend.uuid){
+    <div class="friend-card">
+        {{friend.username}}
+    </div>
+    }
+    } @else {
+    <div class="together-page__empty-friend-list">
+        У вас пока нет друзей
+
+        <a class="button button--primary">
+            Найти друзей
+        </a>
+    </div>
+    }
+
+
+
+</div>
