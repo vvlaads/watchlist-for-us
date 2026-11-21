@@ -4,9 +4,10 @@ import { Movie } from '../../interfaces/Movie';
 import { MovieService } from '../../services/movie-service';
 import { PosterService } from '../../services/poster-service';
 import { MovieCard } from '../../components/movie-card/movie-card';
+import { MovieRatingModal } from '../../shared/components/movie-rating-modal/movie-rating-modal';
 
 @Component({
-  imports: [MovieCard],
+  imports: [MovieCard, MovieRatingModal],
   selector: 'app-movie-page',
   styleUrl: './movie-page.scss',
   templateUrl: './movie-page.html',
@@ -23,6 +24,32 @@ export class MoviePage {
       this.movieService.getMovieById(id).subscribe({
         next: (movie) => {
           this.movie.set(movie);
+        },
+        error: (error) => {
+          console.log(error);
+        }
+      });
+    }
+  }
+
+  showRatingModal = false;
+
+  openMovieRatingModal(): void {
+    this.showRatingModal = true;
+  }
+
+  closeMovieRatingModal(): void {
+    this.showRatingModal = false;
+  }
+
+  public setMovieRating(rating: number) {
+    const currentMovie = this.movie();
+
+    if (currentMovie) {
+      console.log(rating);
+      this.movieService.setMovieRating(currentMovie.uuid, rating).subscribe({
+        next: () => {
+          console.log("+");
         },
         error: (error) => {
           console.log(error);

@@ -1,5 +1,10 @@
 <div class="movie-page">
     @if (movie(); as currentMovie) {
+    @if (showRatingModal) {
+    <app-movie-rating-modal [movieId]="currentMovie.uuid" (closed)="closeMovieRatingModal()"
+        (ratingSubmitted)="setMovieRating($event)" />
+    }
+
     <div class="movie-page__actions">
         <div class="movie-page__poster">
             <img [src]="posterService.getPosterUrl(currentMovie.posterKey)" [alt]="currentMovie.name"
@@ -9,12 +14,9 @@
                 <option>Добавить в список</option>
             </select>
 
-            <button class="button button--primary-dark">
+            <button class="button button--primary-dark" (click)="openMovieRatingModal()">
                 Оценить
             </button>
-
-
-
         </div>
 
         <div class="movie-page__info">

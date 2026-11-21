@@ -47,4 +47,13 @@ export class MovieService {
             switchMap(() => this.http.post(`${this.apiUrl}`, formData))
         );
     }
+
+    public setMovieRating(movieId: string, rating: number) {
+        return this.authService.getCsrfToken().pipe(
+            switchMap(() => this.http.put(
+                `/api/movies/${movieId}/rating`,
+                { rating }
+            ))
+        );
+    }
 }

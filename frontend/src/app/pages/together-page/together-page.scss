@@ -1,4 +1,8 @@
 .together-page {
+    &__friends-description {
+        color: var(--color-text-secondary);
+    }
+
     &__empty-friend-list {
         display: flex;
         flex-direction: column;

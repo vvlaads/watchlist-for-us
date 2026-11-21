@@ -1,0 +1,15 @@
+<app-modal (closed)="close()">
+    <h2>Оценить фильм</h2>
+
+    <div class="rating">
+        @for (rating of ratings; track rating) {
+        <button type="button" [class.active]="selectedRating === rating" (click)="selectedRating = rating">
+            {{ rating }}
+        </button>
+        }
+    </div>
+
+    <button class="button button--primary-dark" [disabled]="selectedRating === null" (click)="submit()">
+        Сохранить
+    </button>
+</app-modal>
