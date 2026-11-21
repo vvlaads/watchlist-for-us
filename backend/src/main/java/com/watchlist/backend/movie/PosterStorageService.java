@@ -1,4 +1,4 @@
-package com.watchlist.backend.service;
+package com.watchlist.backend.movie;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

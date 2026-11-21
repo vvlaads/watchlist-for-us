@@ -1,9 +1,8 @@
 .movie-page {
-    &__info {
+    &__actions {
         display: flex;
         flex-direction: row;
         gap: 40px;
-        margin-bottom: 40px;
     }
 
     &__poster {
@@ -16,6 +15,23 @@
             aspect-ratio: var(--poster-ratio);
             border-radius: 20px;
             border: 1px solid var(--color-border);
+        }
+    }
+
+    &__info {
+        display: flex;
+        flex-direction: column;
+
+        &-genre-list {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+        }
+
+        &--description {
+            &-text {
+                color: var(--color-text-secondary);
+            }
         }
     }
 }

@@ -15,7 +15,6 @@ import org.springframework.web.server.ResponseStatusException;
 import com.watchlist.backend.movie.dto.MovieResponse;
 import com.watchlist.backend.rating.MovieRatingService;
 import com.watchlist.backend.rating.dto.RatingResponse;
-import com.watchlist.backend.service.PosterStorageService;
 
 @Service
 public class MovieService {
@@ -40,7 +39,10 @@ public class MovieService {
                 movie.getPosterKey(),
                 movie.getType(),
                 rating.averageRating(),
-                rating.ratingCount());
+                rating.ratingCount(),
+                movie.getGenres(),
+                movie.getPrimaryGenre(),
+                movie.getReleaseYear());
     }
 
     private MovieResponse toResponse(Movie movie, RatingResponse rating) {
@@ -51,7 +53,10 @@ public class MovieService {
                 movie.getPosterKey(),
                 movie.getType(),
                 rating.averageRating(),
-                rating.ratingCount());
+                rating.ratingCount(),
+                movie.getGenres(),
+                movie.getPrimaryGenre(),
+                movie.getReleaseYear());
     }
 
     private Movie findMovieById(UUID id) {

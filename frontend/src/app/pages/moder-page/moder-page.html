@@ -34,6 +34,40 @@
         </select>
     </div>
 
+    <div class="form-field">
+        <label>Жанры:</label>
+
+        <div class="genres-list">
+            @for (genre of genres; track genre.value) {
+            <label class="genre-option">
+                <input type="checkbox" [checked]="movieForm.controls.genres.value.includes(genre.value)"
+                    (change)="toggleGenre(genre.value, $event)" />
+                {{ genre.label }}
+            </label>
+            }
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label for="primaryGenre">Основной жанр:</label>
+
+        <select id="primaryGenre" formControlName="primaryGenre">
+            <option [ngValue]="null" disabled>Выберите основной жанр</option>
+
+            @for (genre of selectedGenres; track genre.value) {
+            <option [value]="genre.value">
+                {{ genre.label }}
+            </option>
+            }
+        </select>
+    </div>
+
+    <div class="form-field">
+        <label for="releaseYear">Год выхода:</label>
+        <input id="releaseYear" type="number" formControlName="releaseYear" min="1888" max="2100"
+            placeholder="Например, 2024" />
+    </div>
+
     <button type="submit" [disabled]="movieForm.invalid">
         Добавить фильм
     </button>

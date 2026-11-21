@@ -1,6 +1,6 @@
 <div class="movie-page">
     @if (movie(); as currentMovie) {
-    <div class="movie-page__info">
+    <div class="movie-page__actions">
         <div class="movie-page__poster">
             <img [src]="posterService.getPosterUrl(currentMovie.posterKey)" [alt]="currentMovie.name"
                 class="movie-page__poster--image" />
@@ -13,24 +13,35 @@
                 Оценить
             </button>
 
+
+
+        </div>
+
+        <div class="movie-page__info">
+            <h1>
+                {{currentMovie.name}}
+            </h1>
+            <div>
+                Тип: {{currentMovie.type}}
+            </div>
             <div>
                 Средняя оценка: {{currentMovie.averageRating}}
             </div>
             <div>
                 Людей оценило: {{currentMovie.ratingCount}}
             </div>
+            <div>Жанры:</div>
+            <div class="movie-page__info-genre-list">
+                @for(genre of currentMovie.genres; track genre){
+                <div>{{genre}}</div>
+                }
+            </div>
 
-        </div>
-
-        <div class="movie-page__text">
-            <h1>
-                {{currentMovie.name}}
-            </h1>
-            <span>{{currentMovie.type}}</span>
-
-            <h2>Описание</h2>
-            <div>
-                {{currentMovie.description}}
+            <div class="movie-page__info--description">
+                <h2>Описание</h2>
+                <div class="movie-page__info--description-text">
+                    {{currentMovie.description}}
+                </div>
             </div>
         </div>
     </div>

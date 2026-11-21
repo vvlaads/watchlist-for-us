@@ -20,8 +20,12 @@
         {{ movie.name }}
     </div>
     <div class="movie-card__description">
-        <span class="movie-card__description-genre">Фантастика</span>
-        <span class="movie-card__description-year">2017</span>
+        <span class="movie-card__description-genre">
+            {{movie.primaryGenre}}
+        </span>
+        <span class="movie-card__description-year">
+            {{movie.releaseYear}}
+        </span>
     </div>
     }
 </a>
