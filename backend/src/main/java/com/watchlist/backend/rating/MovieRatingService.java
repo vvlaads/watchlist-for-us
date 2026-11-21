@@ -1,6 +1,10 @@
 package com.watchlist.backend.rating;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -23,13 +27,19 @@ public class MovieRatingService {
         this.userRepository = userRepository;
     }
 
-    public RatingResponse getMovieRatingByMovieId(UUID movieId) {
-        Double averageRating = movieRatingRepository.findAverageRatingByMovieId(movieId);
-        Long ratingCount = movieRatingRepository.countByMovieId(movieId);
+    public Map<UUID, RatingResponse> getMovieRatings(Collection<UUID> movieIds) {
+        return movieRatingRepository.findSummariesByMovieIds(movieIds)
+                .stream()
+                .collect(Collectors.toMap(
+                        MovieRatingSummary::getMovieId,
+                        summary -> new RatingResponse(
+                                summary.getAverageRating(),
+                                summary.getRatingCount())));
+    }
 
-        return new RatingResponse(
-                averageRating != null ? averageRating : 0.0,
-                ratingCount);
+    public RatingResponse getMovieRatingByMovieId(UUID movieId) {
+        return getMovieRatings(List.of(movieId))
+                .getOrDefault(movieId, new RatingResponse(0.0, 0L));
     }
 
     public Integer getUserRating(UUID movieId, UUID userId) {

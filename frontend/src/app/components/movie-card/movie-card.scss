@@ -32,6 +32,18 @@
             border: 1px solid var(--color-border);
         }
 
+        &--rating {
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            border: 1px solid var(--color-border);
+            border-radius: 10px;
+            padding: 5px;
+            background-color: var(--color-surface);
+            font-size: var(--font-size-small);
+            color: var(--color-text-secondary);
+        }
+
         &--type {
             position: absolute;
             left: 10px;
@@ -39,9 +51,18 @@
             border: 1px solid var(--color-border);
             border-radius: 10px;
             padding: 5px;
-            background-color: var(--color-primary);
+            background-color: var(--color-surface);
             font-size: var(--font-size-small);
         }
+    }
+
+    &__name {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+
+        line-height: 1.4;
     }
 
     &__description {

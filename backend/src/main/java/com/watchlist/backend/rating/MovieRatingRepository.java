@@ -1,5 +1,7 @@
 package com.watchlist.backend.rating;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -33,4 +35,15 @@ public interface MovieRatingRepository extends JpaRepository<MovieRating, UUID> 
             @Param("userId") UUID userId);
 
     Optional<MovieRating> findByMovieUuidAndUserUuid(UUID movieId, UUID userId);
+
+    @Query("""
+                SELECT
+                    r.movie.uuid AS movieId,
+                    AVG(r.rating) AS averageRating,
+                    COUNT(r) AS ratingCount
+                FROM MovieRating r
+                WHERE r.movie.uuid IN :movieIds
+                GROUP BY r.movie.uuid
+            """)
+    List<MovieRatingSummary> findSummariesByMovieIds(@Param("movieIds") Collection<UUID> movieIds);
 }

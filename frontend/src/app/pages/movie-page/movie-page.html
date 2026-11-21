@@ -1,20 +1,57 @@
 <div class="movie-page">
-    @if (movie(); as currentMovie){
-    <div class="movie-page__a">
-        <img [src]="posterService.getPosterUrl(currentMovie.posterKey)" [alt]="currentMovie.name"
-            class="movie-page__poster" />
+    @if (movie(); as currentMovie) {
+    <div class="movie-page__info">
+        <div class="movie-page__poster">
+            <img [src]="posterService.getPosterUrl(currentMovie.posterKey)" [alt]="currentMovie.name"
+                class="movie-page__poster--image" />
 
-    </div>
+            <select>
+                <option>Добавить в список</option>
+            </select>
 
-    <div class="movie-page__text">
-        <h1>
-            {{currentMovie.name}}
-        </h1>
-        <span>{{currentMovie.type}}</span>
-        
-        <div>
-            {{currentMovie.description}}
+            <button class="button button--primary-dark">
+                Оценить
+            </button>
+
+            <div>
+                Средняя оценка: {{currentMovie.averageRating}}
+            </div>
+            <div>
+                Людей оценило: {{currentMovie.ratingCount}}
+            </div>
+
+        </div>
+
+        <div class="movie-page__text">
+            <h1>
+                {{currentMovie.name}}
+            </h1>
+            <span>{{currentMovie.type}}</span>
+
+            <h2>Описание</h2>
+            <div>
+                {{currentMovie.description}}
+            </div>
         </div>
     </div>
+
+    <h2>Связанное</h2>
+    <div class="movie-page__bb-movie-list">
+        @for (movie of movies(); track movie.uuid) {
+        <app-movie-card [movie]="movie" />
+        }
+    </div>
+
+    <h2>Похожее</h2>
+    <div class="movie-page__same-movie-list">
+        @for (movie of movies(); track movie.uuid) {
+        <app-movie-card [movie]="movie" />
+        }
+    </div>
+    }
+
+
+    @else {
+    <div>Не нашли</div>
     }
 </div>

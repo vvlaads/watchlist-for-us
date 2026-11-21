@@ -3,15 +3,17 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../../interfaces/Movie';
 import { MovieService } from '../../services/movie-service';
 import { PosterService } from '../../services/poster-service';
+import { MovieCard } from '../../components/movie-card/movie-card';
 
 @Component({
-  imports: [],
+  imports: [MovieCard],
   selector: 'app-movie-page',
   styleUrl: './movie-page.scss',
   templateUrl: './movie-page.html',
 })
 export class MoviePage {
   public movie: WritableSignal<Movie | null> = signal(null);
+  public movies: WritableSignal<Movie[]> = signal([]);
 
   constructor(private route: ActivatedRoute, private movieService: MovieService, public posterService: PosterService) { }
 

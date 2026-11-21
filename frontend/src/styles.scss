@@ -1,9 +1,11 @@
 :root {
-    --color-primary: #5dffce;
-    --color-primary-hover: #42eabb;
-    --color-primary-transparent: rgba(93, 255, 206, 0.3);
-    --color-primary-dark: #20c99b;
-    --color-primary-dark-transparent: rgba(32, 201, 155, 0.3);
+    --color-primary: #B8DCCF;
+    --color-primary-hover: #A5CEBE;
+    --color-primary-transparent: rgba(125, 170, 151, 0.15);
+
+    --color-primary-dark: #527D6B;
+    --color-primary-dark-hover: #426A59;
+    --color-primary-dark-transparent: rgba(82, 125, 107, 0.15);
 
     --color-background: #f7f9f8;
     --color-surface: #ffffff;
@@ -89,12 +91,27 @@ button {
     border-radius: 20px;
     padding: 10px;
     border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+
+    &:hover {
+        background-color: var(--color-surface-hover);
+    }
 
     &--primary {
+        color: var(--color-text);
         background-color: var(--color-primary);
 
         &:hover {
             background-color: var(--color-primary-hover);
+        }
+    }
+
+    &--primary-dark {
+        color: var(--color-text-inverse);
+        background-color: var(--color-primary-dark);
+
+        &:hover {
+            background-color: var(--color-primary-dark-hover);
         }
     }
 }
@@ -104,7 +121,7 @@ textarea,
 select {
     width: 100%;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-medium);
+    border-radius: 10px;
     padding: 10px 12px;
     background: var(--color-surface);
     color: var(--color-text);

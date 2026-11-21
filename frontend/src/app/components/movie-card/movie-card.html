@@ -8,7 +8,7 @@
         <img src="assets/posters/not found.png" alt="" class="movie-card__poster--image" draggable="false" />
         }
         <div class="movie-card__poster--rating">
-
+            ⭐{{movie.averageRating}}/10
         </div>
         <div class="movie-card__poster--type" [ngStyle]="typeStyles[movie.type]">
             {{ typeStyles[movie.type].label }}
@@ -16,7 +16,9 @@
     </div>
 
 
-    <div class="movie-card__name">{{ movie.name }}</div>
+    <div class="movie-card__name">
+        {{ movie.name }}
+    </div>
     <div class="movie-card__description">
         <span class="movie-card__description-genre">Фантастика</span>
         <span class="movie-card__description-year">2017</span>

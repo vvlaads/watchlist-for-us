@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.watchlist.backend.movie.dto.MovieResponse;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -31,26 +33,26 @@ public class MovieController {
     }
 
     @GetMapping("/popular")
-    public ResponseEntity<Page<Movie>> getPopularMovies(Pageable pageable) {
+    public ResponseEntity<Page<MovieResponse>> getPopularMovies(Pageable pageable) {
         return ResponseEntity.ok(movieService.getPopularMovies(pageable));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Movie> getMovie(@PathVariable UUID id) {
+    public ResponseEntity<MovieResponse> getMovie(@PathVariable UUID id) {
         return ResponseEntity.ok(movieService.getMovieById(id));
     }
 
     @PreAuthorize("hasRole('MODERATOR')")
     @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Movie> addMovie(@RequestPart("movie") Movie movie,
+    public ResponseEntity<MovieResponse> addMovie(@RequestPart("movie") Movie movie,
             @RequestPart(value = "poster", required = false) MultipartFile poster) throws IOException {
-        Movie saved = movieService.addMovie(movie, poster);
+        MovieResponse saved = movieService.addMovie(movie, poster);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
 
     @PreAuthorize("hasRole('MODERATOR')")
     @PutMapping("/{id}")
-    public ResponseEntity<Movie> updateMovie(
+    public ResponseEntity<MovieResponse> updateMovie(
             @PathVariable UUID id,
             @RequestBody Movie movie) {
 

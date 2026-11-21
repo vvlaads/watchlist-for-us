@@ -6,4 +6,6 @@ export interface Movie {
     description: string;
     type: MovieType;
     posterKey: string;
+    averageRating: number;
+    ratingCount: number;
 }
