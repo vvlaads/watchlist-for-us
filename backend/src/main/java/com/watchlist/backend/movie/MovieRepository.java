@@ -1,6 +1,4 @@
-package com.watchlist.backend.repository;
-
-import com.watchlist.backend.entity.Movie;
+package com.watchlist.backend.movie;
 
 import java.util.UUID;
 

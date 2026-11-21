@@ -1,4 +1,4 @@
-package com.watchlist.backend.controller;
+package com.watchlist.backend.movie;
 
 import java.io.IOException;
 import java.util.UUID;

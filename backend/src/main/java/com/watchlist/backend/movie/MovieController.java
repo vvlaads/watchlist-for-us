@@ -1,4 +1,4 @@
-package com.watchlist.backend.controller;
+package com.watchlist.backend.movie;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -16,9 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-
-import com.watchlist.backend.entity.Movie;
-import com.watchlist.backend.service.MovieService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

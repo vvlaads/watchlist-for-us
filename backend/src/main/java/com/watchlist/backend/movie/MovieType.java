@@ -1,4 +1,4 @@
-package com.watchlist.backend.entity;
+package com.watchlist.backend.movie;
 
 public enum MovieType {
     ANIME,

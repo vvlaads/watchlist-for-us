@@ -1,4 +1,4 @@
-package com.watchlist.backend.service;
+package com.watchlist.backend.movie;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -10,8 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.watchlist.backend.entity.Movie;
-import com.watchlist.backend.repository.MovieRepository;
+import com.watchlist.backend.service.PosterStorageService;
 
 @Service
 public class MovieService {
