@@ -1,10 +1,9 @@
 export const APP_ROUTES = {
     AUTH: '/auth',
 
-    FOR_YOU: '/for-you',
     TOGETHER: '/together',
-    POPULAR: '/popular',
     CATALOG: '/catalog',
+    MY_LIBRARY: 'my-library',
 
     MOVIE: '/movies',
 

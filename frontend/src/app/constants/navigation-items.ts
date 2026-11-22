@@ -3,10 +3,9 @@ import { APP_ROUTES } from './app-routes';
 
 export const NAVIGATION_ITEMS: NavigationItem[] = [
     {
-        label: 'Для тебя',
-        route: APP_ROUTES.FOR_YOU,
-        icon: 'Star.svg',
-        exact: true
+        label: 'Каталог',
+        route: APP_ROUTES.CATALOG,
+        icon: 'Book.svg'
     },
     {
         label: 'Вместе',
@@ -14,14 +13,9 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
         icon: 'Users.svg'
     },
     {
-        label: 'Популярное',
-        route: APP_ROUTES.POPULAR,
-        icon: 'Trending up.svg'
-    },
-    {
-        label: 'Каталог',
-        route: APP_ROUTES.CATALOG,
-        icon: 'Book.svg'
+        label: 'Мои списки',
+        route: APP_ROUTES.MY_LIBRARY,
+        icon: 'Bookmark.svg'
     },
     {
         label: 'Управление каталогом',
