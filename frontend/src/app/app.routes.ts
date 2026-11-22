@@ -10,6 +10,7 @@ import { CatalogPage } from './pages/catalog-page/catalog-page';
 import { ModerationMoviesPage } from './pages/moderation/movies-page/movies-page';
 import { MovieCreatePage } from './pages/moderation/movie-create-page/movie-create-page';
 import { MovieEditPage } from './pages/moderation/movie-edit-page/movie-edit-page';
+import { authGuard } from './auth.guard';
 
 export const routes: Routes = [
     {
@@ -27,7 +28,8 @@ export const routes: Routes = [
     },
     {
         path: 'together',
-        component: TogetherPage
+        component: TogetherPage,
+        canActivate: [authGuard]
     },
     {
         path: 'popular',
@@ -43,15 +45,13 @@ export const routes: Routes = [
     },
     {
         path: 'friends',
-        component: FriendsPage
-    },
-    {
-        path: 'profile',
-        component: ProfilePage
+        component: FriendsPage,
+        canActivate: [authGuard]
     },
     {
         path: 'profile/:userId',
-        component: ProfilePage
+        component: ProfilePage,
+        canActivate: [authGuard]
     },
     {
         path: 'moderation',

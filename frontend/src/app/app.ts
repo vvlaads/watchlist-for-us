@@ -2,9 +2,10 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Navigation } from './navigation/navigation';
 import { AuthService } from './services/auth-service';
+import { AuthModal } from './shared/components/auth-modal/auth-modal';
 
 @Component({
-  imports: [RouterOutlet, Navigation],
+  imports: [RouterOutlet, Navigation, AuthModal],
   selector: 'app-root',
   styleUrl: './app.scss',
   templateUrl: './app.html',
