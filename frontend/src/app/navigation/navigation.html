@@ -6,44 +6,52 @@
     </div>
 
     <nav class="navigation-container">
-        <a routerLink="/" routerLinkActive="navigation--link-active" [routerLinkActiveOptions]="{ exact: true }"
-            class="navigation--link">
-            <img src="assets/icons/Star.svg" alt="" class="navigation--link-icon" />
-            <span> Для тебя </span>
-        </a>
 
-        <a routerLink="/together" routerLinkActive="navigation--link-active" class="navigation--link">
-            <img src="assets/icons/Users.svg" alt="" class="navigation--link-icon" />
-            <span>Вместе</span>
-        </a>
 
-        <a routerLink="/popular" routerLinkActive="navigation--link-active" class="navigation--link">
-            <img src="assets/icons/Trending up.svg" alt="" class="navigation--link-icon" />
-            <span>Популярное</span>
-        </a>
+        <!-- Основные разделы -->
+        @for(item of navigationItems; track item.route){
+        @if (!item.moderatorOnly){
+        <a [routerLink]="item.route" routerLinkActive="navigation--link-active"
+            [routerLinkActiveOptions]="{ exact: item.exact ?? false }" class="navigation--link">
 
-        <a routerLink="/moder" routerLinkActive="navigation--link-active" class="navigation--link">
-            <img src="assets/icons/Star.svg" alt="" class="navigation--link-icon" />
-            <span>Модерация</span>
-        </a>
+            <img [src]="'assets/icons/' + item.icon" alt="" class="navigation--link-icon" />
 
+            <span>{{ item.label }}</span>
+        </a>
+        }
+        }
         <hr>
 
-        <div class="navigation-footer">
-            @if (authService.currentUser(); as user) {
-            <a [routerLink]="`/users/${user.uuid}/friends`" routerLinkActive="navigation--link-active"
-                class="navigation--link">
-                Друзья
-            </a>
-            <a [routerLink]="['/users/', user.uuid]" routerLinkActive="navigation--link-active"
-                class="navigation--link">
-                {{ user.username }}
-            </a>
-            } @else {
-            <a routerLink="/auth" routerLinkActive="navigation--link-active">
-                Войти
-            </a>
-            }
-        </div>
+        <!-- Социальная часть -->
+        @if (authService.currentUser(); as user) {
+        <a routerLink="/friends" routerLinkActive="navigation--link-active" class="navigation--link">
+            <img src="assets/icons/Users.svg" alt="" class="navigation--link-icon">
+            <span>Друзья</span>
+        </a>
+
+        <a [routerLink]="[routes.PROFILE, user.uuid]" routerLinkActive="navigation--link-active"
+            class="navigation--link">
+            <img src="assets/icons/User.svg" alt="" class="navigation--link-icon">
+            <span>{{ user.username }}</span>
+        </a>
+        } @else {
+        <a [routerLink]="routes.AUTH" routerLinkActive="navigation--link-active" class="navigation--link">
+            <span>Войти</span>
+        </a>
+        }
+
+        <!-- Управление -->
+        @if (authService.currentUser()?.role === 'MODERATOR') {
+        <hr>
+
+        @for (item of navigationItems; track item.route) {
+        @if (item.moderatorOnly) {
+        <a [routerLink]="item.route" routerLinkActive="navigation--link-active" class="navigation--link">
+            <img [src]="'assets/icons/' + item.icon" alt="" class="navigation--link-icon" />
+            <span>{{ item.label }}</span>
+        </a>
+        }
+        }
+        }
     </nav>
 </div>

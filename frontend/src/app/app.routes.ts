@@ -1,12 +1,15 @@
 import { Routes } from '@angular/router';
-import { ModerPage } from './pages/moder-page/moder-page';
 import { ProfilePage } from './pages/profile-page/profile-page';
-import { RecommendationsPage } from './pages/recommendations-page/recommendations-page';
+import { ForYouPage } from './pages/for-you-page/for-you-page';
 import { TogetherPage } from './pages/together-page/together-page';
 import { PopularPage } from './pages/popular-page/popular-page';
 import { FriendsPage } from './pages/friends-page/friends-page';
 import { Auth } from './pages/auth/auth';
 import { MoviePage } from './pages/movie-page/movie-page';
+import { CatalogPage } from './pages/catalog-page/catalog-page';
+import { ModerationMoviesPage } from './pages/moderation/movies-page/movies-page';
+import { MovieCreatePage } from './pages/moderation/movie-create-page/movie-create-page';
+import { MovieEditPage } from './pages/moderation/movie-edit-page/movie-edit-page';
 
 export const routes: Routes = [
     {
@@ -15,7 +18,12 @@ export const routes: Routes = [
     },
     {
         path: '',
-        component: RecommendationsPage
+        redirectTo: 'for-you',
+        pathMatch: 'full'
+    },
+    {
+        path: 'for-you',
+        component: ForYouPage
     },
     {
         path: 'together',
@@ -26,19 +34,49 @@ export const routes: Routes = [
         component: PopularPage
     },
     {
-        path: 'moder',
-        component: ModerPage
-    },
-    {
-        path: 'users/:id/friends',
-        component: FriendsPage
-    },
-    {
-        path: 'users/:id',
-        component: ProfilePage
+        path: 'catalog',
+        component: CatalogPage
     },
     {
         path: 'movies/:id',
         component: MoviePage
-    }
+    },
+    {
+        path: 'friends',
+        component: FriendsPage
+    },
+    {
+        path: 'profile',
+        component: ProfilePage
+    },
+    {
+        path: 'profile/:userId',
+        component: ProfilePage
+    },
+    {
+        path: 'moderation',
+        children: [
+            {
+                path: '',
+                redirectTo: 'movies',
+                pathMatch: 'full'
+            },
+            {
+                path: 'movies',
+                component: ModerationMoviesPage
+            },
+            {
+                path: 'movies/new',
+                component: MovieCreatePage
+            },
+            {
+                path: 'movies/:id/edit',
+                component: MovieEditPage
+            },
+        ]
+    },
+    {
+        path: '**',
+        redirectTo: 'for-you'
+    },
 ];

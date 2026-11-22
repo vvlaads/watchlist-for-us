@@ -1,7 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { User } from '../interfaces/User';
 import { AuthService } from '../services/auth-service';
+import { NAVIGATION_ITEMS } from '../constants/navigation-items';
+import { APP_ROUTES } from '../constants/app-routes';
 
 @Component({
   imports: [RouterLink, RouterLinkActive],
@@ -10,5 +11,8 @@ import { AuthService } from '../services/auth-service';
   templateUrl: './navigation.html',
 })
 export class Navigation {
-  readonly authService = inject(AuthService);
+  readonly navigationItems = NAVIGATION_ITEMS;
+  readonly routes = APP_ROUTES;
+
+  constructor(public authService: AuthService) { }
 }

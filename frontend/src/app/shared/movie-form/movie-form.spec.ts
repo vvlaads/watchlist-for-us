@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RecommendationsPage } from './recommendations-page';
+import { MovieForm } from './movie-form';
 
-describe('RecommendationsPage', () => {
-  let component: RecommendationsPage;
-  let fixture: ComponentFixture<RecommendationsPage>;
+describe('MovieForm', () => {
+  let component: MovieForm;
+  let fixture: ComponentFixture<MovieForm>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RecommendationsPage],
+      imports: [MovieForm],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(RecommendationsPage);
+    fixture = TestBed.createComponent(MovieForm);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MovieService } from '../../services/movie-service';
-import { Genre } from '../../interfaces/Genre';
-import { GENRE_LABELS } from '../../utils/genres';
+import { GENRE_LABELS } from '../../../utils/genres';
+import { Genre } from '../../../interfaces/Genre';
+import { MovieService } from '../../../services/movie-service';
 
 @Component({
   imports: [ReactiveFormsModule],
-  selector: 'app-moder-page',
-  styleUrl: './moder-page.scss',
-  templateUrl: './moder-page.html',
+  selector: 'app-moderation-movies-page',
+  styleUrl: './movies-page.scss',
+  templateUrl: './movies-page.html',
 })
-export class ModerPage {
+export class ModerationMoviesPage {
   public selectedFile: File | null = null;
   public previewUrl: string | null = null;
 
