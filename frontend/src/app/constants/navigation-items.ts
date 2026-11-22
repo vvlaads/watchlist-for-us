@@ -21,12 +21,12 @@ export const NAVIGATION_ITEMS: NavigationItem[] = [
     {
         label: 'Каталог',
         route: APP_ROUTES.CATALOG,
-        icon: 'Library.svg'
+        icon: 'Book.svg'
     },
     {
         label: 'Управление каталогом',
         route: APP_ROUTES.MODERATION,
-        icon: 'Settings.svg',
+        icon: 'Tool.svg',
         moderatorOnly: true
     }
 ];

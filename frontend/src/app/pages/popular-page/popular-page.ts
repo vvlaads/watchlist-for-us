@@ -1,29 +1,53 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../interfaces/Movie';
 import { PosterService } from '../../services/poster-service';
 import { MovieCard } from '../../shared/components/movie-card/movie-card';
+import { SearchService } from '../../services/search-service';
+import { Search } from '../../shared/components/search/search';
+import { MovieList } from '../../shared/components/movie-list/movie-list';
 
 @Component({
-  imports: [MovieCard],
+  imports: [MovieCard, Search, MovieList],
   selector: 'app-popular-page',
   styleUrl: './popular-page.scss',
   templateUrl: './popular-page.html',
 })
 export class PopularPage implements OnInit {
-  constructor(private movieService: MovieService, public posterService: PosterService) { }
-
-  public movies = signal<Movie[]>([]);
+  public loading: WritableSignal<boolean> = signal(true);
+  public movies: WritableSignal<Movie[]> = signal([]);
 
   public movieTypes = ['Все', 'Аниме', 'Фильмы', 'Мультфильмы'];
 
-  ngOnInit(): void {
-    this.movieService.getPopularMovies(0, 20).subscribe({
-      next: (value) => {
-        this.movies.set(value.content);
+  private search;
+
+  constructor(private movieService: MovieService, public posterService: PosterService, private searchService: SearchService) {
+    this.search = this.searchService.createSearchStream();
+  }
+
+  public ngOnInit(): void {
+    this.loadMovies();
+
+    this.search.search.subscribe(query => {
+      this.loadMovies(query);
+    });
+  }
+
+  public onSearchChange(query: string): void {
+    this.search.setSearch(query);
+  }
+
+  public loadMovies(search = ''): void {
+    this.loading.set(true);
+
+    this.movieService.getMovies(0, 20, search).subscribe({
+      next: response => {
+        this.movies.set(response.content);
+        this.loading.set(false);
       },
-      error: (error) => {
-        console.error('Ошибка загрузки популярных фильмов', error);
+      error: error => {
+        console.error('Ошибка загрузки фильмов', error);
+        this.loading.set(false);
       }
     });
   }

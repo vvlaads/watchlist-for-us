@@ -5,11 +5,7 @@
         Истории, которые обсуждают все.
     </p>
 
-    <div class="search">
-        <img src="assets/icons/search.svg" alt="">
-        <input type="search" placeholder="Поиск фильмов, аниме...">
-    </div>
-
+    <app-search (searchChange)="onSearchChange($event)" />
 
     <div class="popular-page__movie-type-list">
         @for(type of movieTypes; track type){
@@ -17,11 +13,7 @@
         }
     </div>
 
-    <div class="popular-page__movie-list">
-        @for (m of movies(); track m.uuid) {
-        <app-movie-card [movie]="m" />
-        }
-    </div>
+    <app-movie-list [movies]="movies()" [loading]="loading()" />
 
 
 </div>

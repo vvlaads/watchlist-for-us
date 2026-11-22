@@ -6,5 +6,7 @@
         Список всех произведений
     </p>
 
+    <app-search (searchChange)="onSearchChange($event)" />
+
     <app-movie-list [movies]="movies()" [loading]="loading()" />
 </div>

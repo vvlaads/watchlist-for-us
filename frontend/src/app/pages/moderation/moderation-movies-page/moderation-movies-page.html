@@ -7,7 +7,7 @@
     </p>
 
     <div class="moderation-movies-page__actions">
-        <app-search />
+        <app-search (searchChange)="onSearchChange($event)" />
 
         <a routerLink="/moderation/movies/new" class="button button--primary-dark">
             Добавить произведение

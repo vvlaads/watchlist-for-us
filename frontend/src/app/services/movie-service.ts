@@ -17,21 +17,21 @@ export class MovieService {
         return this.http.get<Movie>(`${this.apiUrl}/${uuid}`)
     }
 
-    public getMovies(page: number, size: number) {
+    public getMovies(page: number, size: number, search = '') {
         return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
-            params: { page, size }
+            params: { page, size, search }
         });
     }
 
-    public getPopularMovies(page: number, size: number) {
+    public getPopularMovies(page: number, size: number, search = '') {
         return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
-            params: { page, size }
+            params: { page, size, search }
         });
     }
 
-    public getRecommendedMovies(page: number, size: number) {
+    public getRecommendedMovies(page: number, size: number, search = '') {
         return this.http.get<Page<Movie>>(`${this.apiUrl}/recommended`, {
-            params: { page, size }
+            params: { page, size, search }
         });
     }
 

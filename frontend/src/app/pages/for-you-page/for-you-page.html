@@ -1,4 +1,13 @@
 <div class="for-you-page">
-    <h1>Для тебя</h1>
-    <p class="for-you-page__description">Что-тО</p>
+    <h1 class="for-you-page__title">
+        Для тебя
+    </h1>
+
+    <p class="for-you-page__description">
+        Подобрано для вас
+    </p>
+
+    <app-search (searchChange)="onSearchChange($event)" />
+
+    <app-movie-list [movies]="movies()" [loading]="loading()" />
 </div>

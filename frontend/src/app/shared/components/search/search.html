@@ -1,4 +1,6 @@
 <div class="search">
-    <img src="assets/icons/search.svg" alt="">
-    <input type="search" placeholder="Поиск фильмов, аниме и мультфильмов">
+    <img src="assets/icons/Search.svg" alt="" class="search-icon">
+
+    <input type="search" [placeholder]="placeholder" [value]="value"
+        (input)="onSearchChange($any($event.target).value)">
 </div>

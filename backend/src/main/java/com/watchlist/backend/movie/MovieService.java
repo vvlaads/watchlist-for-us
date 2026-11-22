@@ -65,8 +65,14 @@ public class MovieService {
                         HttpStatus.NOT_FOUND, "Movie not found"));
     }
 
-    public Page<MovieResponse> getPopularMovies(Pageable pageable) {
-        Page<Movie> movies = movieRepository.findAll(pageable);
+    public Page<MovieResponse> getPopularMovies(String search, Pageable pageable) {
+        Page<Movie> movies;
+
+        if (search == null || search.isBlank()) {
+            movies = movieRepository.findAll(pageable);
+        } else {
+            movies = movieRepository.searchMovies(search.trim(), pageable);
+        }
 
         List<UUID> movieIds = movies.getContent()
                 .stream()

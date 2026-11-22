@@ -8,42 +8,4 @@
         flex-direction: row;
         gap: 20px;
     }
-
-    &__movie-list {
-        display: grid;
-        grid-template-columns: repeat(5, 1fr);
-    }
-}
-
-.search {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    width: 360px;
-    padding: 0 14px;
-
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-medium);
-
-    transition: border-color 0.2s;
-
-    &:focus-within {
-        border-color: var(--color-primary-dark);
-    }
-
-    img {
-        width: 20px;
-        height: 20px;
-        opacity: 0.5;
-    }
-
-    input {
-        border: none;
-        outline: none;
-        box-shadow: none;
-        padding: 12px 0;
-        background: transparent;
-    }
 }
