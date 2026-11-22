@@ -1,10 +1,11 @@
 <div class="together-page">
-
-
     <h1>Вместе</h1>
+    <p class="together-page__description">Выберите, что посмотреть с друзьями</p>
 
     <h2>Друзья</h2>
-    <div class="together-page__friends-description">Выбери друзей, с которыми хочешь подобрать совпадения</div>
+    <p class="together-page__friends-description">
+        Выбери друзей, с которыми хочешь подобрать совпадения
+    </p>
 
     <div class="together-page__friend-list">
         @if(friends.length > 0){
@@ -22,8 +23,19 @@
             </a>
         </div>
         }
+    </div>
 
 
+    <h2>Список</h2>
+    <div class="together-page__content">
+        <div>
+            <div style="margin-bottom: 20px;">
+                <app-search (searchChange)="onSearchChange($event)" />
+            </div>
 
+            <app-movie-list [movies]="movies()" [loading]="loading()" />
+        </div>
+
+        <app-filter-list />
     </div>
 </div>

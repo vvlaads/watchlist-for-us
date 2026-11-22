@@ -1,0 +1,32 @@
+<div class="filter-list">
+    <h2>Фильтры</h2>
+
+    <div class="filter-list__content">
+        <div class="filter-list__group">
+            <span>Год релиза:</span>
+
+            <div class="filter-list__row">
+                <input type="number" placeholder="От" />
+                <input type="number" placeholder="До" />
+            </div>
+        </div>
+
+        <div class="filter-list__group">
+            <span>Оценка:</span>
+
+            <div class="filter-list__row">
+                <input type="number" placeholder="От" />
+                <input type="number" placeholder="До" />
+            </div>
+        </div>
+
+        <div class="filter-list__group">
+            <span>Жанры:</span>
+        </div>
+    </div>
+
+    <div class="filter-list__actions">
+        <button class="button button--primary-dark" (click)="applyFilters()">Применить</button>
+        <button class="button" (click)="resetFilters()">Сбросить</button>
+    </div>
+</div>

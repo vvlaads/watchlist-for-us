@@ -5,9 +5,10 @@ import { Movie } from '../../interfaces/Movie';
 import { finalize } from 'rxjs';
 import { Search } from '../../shared/components/search/search';
 import { SearchService } from '../../services/search-service';
+import { FilterList } from '../../shared/components/filter-list/filter-list';
 
 @Component({
-  imports: [MovieList, Search],
+  imports: [MovieList, Search, FilterList],
   selector: 'app-catalog-page',
   styleUrl: './catalog-page.scss',
   templateUrl: './catalog-page.html',

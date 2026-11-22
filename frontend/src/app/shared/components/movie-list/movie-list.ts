@@ -17,5 +17,5 @@ export class MovieList {
   public loading: boolean = true;
 
   @Input()
-  public link: string | null = null;
+  public link: string = '/movies';
 }

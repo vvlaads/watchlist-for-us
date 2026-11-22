@@ -1,4 +1,8 @@
 .together-page {
+    &__description {
+        color: var(--color-text-secondary);
+    }
+
     &__friends-description {
         color: var(--color-text-secondary);
     }
@@ -11,5 +15,11 @@
         border-radius: 20px;
         border: 1px solid var(--color-border);
         border-style: dashed;
+    }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
     }
 }

@@ -7,7 +7,14 @@
         Подобрано для вас
     </p>
 
-    <app-search (searchChange)="onSearchChange($event)" />
+    <div class="for-you-page__content">
+        <div>
+            <div style="margin-bottom: 20px;">
+                <app-search (searchChange)="onSearchChange($event)" />
+            </div>
+            <app-movie-list [movies]="movies()" [loading]="loading()" />
+        </div>
 
-    <app-movie-list [movies]="movies()" [loading]="loading()" />
+        <app-filter-list />
+    </div>
 </div>

@@ -2,4 +2,10 @@
     &__description {
         color: var(--color-text-secondary);
     }
+
+    &__content {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 40px;
+    }
 }

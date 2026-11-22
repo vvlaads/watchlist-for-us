@@ -2,11 +2,20 @@
     <h1 class="catalog-page__title">
         Каталог
     </h1>
+
     <p class="catalog-page__description">
         Список всех произведений
     </p>
 
-    <app-search (searchChange)="onSearchChange($event)" />
+    <div class="catalog-page__content">
+        <div>
+            <div style="margin-bottom: 20px;">
+                <app-search (searchChange)="onSearchChange($event)" />
+            </div>
 
-    <app-movie-list [movies]="movies()" [loading]="loading()" />
+            <app-movie-list [movies]="movies()" [loading]="loading()" />
+        </div>
+
+        <app-filter-list />
+    </div>
 </div>

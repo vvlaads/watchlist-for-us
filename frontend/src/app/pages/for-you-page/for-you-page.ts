@@ -4,9 +4,10 @@ import { MovieService } from '../../services/movie-service';
 import { SearchService } from '../../services/search-service';
 import { Search } from '../../shared/components/search/search';
 import { MovieList } from '../../shared/components/movie-list/movie-list';
+import { FilterList } from '../../shared/components/filter-list/filter-list';
 
 @Component({
-  imports: [Search, MovieList],
+  imports: [Search, MovieList, FilterList],
   selector: 'app-for-you-page',
   styleUrl: './for-you-page.scss',
   templateUrl: './for-you-page.html',

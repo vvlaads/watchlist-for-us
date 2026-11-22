@@ -1,8 +1,13 @@
-<h1>Друзья</h1>
-<div class="friends-page__friend-list">
-    @for (friend of friends; track friend.uuid){
-    <div class="friend-card">
-        {{friend.username}}
+<div class="friends-page">
+
+    <h1>Друзья</h1>
+    <div class="friends-page__friend-list">
+        @for (friend of friends; track friend.uuid){
+        <div class="friend-card">
+            {{friend.username}}
+        </div>
+        }
     </div>
-    }
+
+
 </div>

@@ -1,0 +1,26 @@
+.filter-list {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-surface-transparent);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-default);
+    padding: 20px;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    &__row {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+
+    &__actions {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+}

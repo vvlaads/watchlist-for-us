@@ -1,14 +1,13 @@
 import { Component, OnInit, signal, WritableSignal } from '@angular/core';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../interfaces/Movie';
-import { PosterService } from '../../services/poster-service';
-import { MovieCard } from '../../shared/components/movie-card/movie-card';
 import { SearchService } from '../../services/search-service';
 import { Search } from '../../shared/components/search/search';
 import { MovieList } from '../../shared/components/movie-list/movie-list';
+import { FilterList } from '../../shared/components/filter-list/filter-list';
 
 @Component({
-  imports: [MovieCard, Search, MovieList],
+  imports: [Search, MovieList, FilterList],
   selector: 'app-popular-page',
   styleUrl: './popular-page.scss',
   templateUrl: './popular-page.html',
@@ -21,7 +20,7 @@ export class PopularPage implements OnInit {
 
   private search;
 
-  constructor(private movieService: MovieService, public posterService: PosterService, private searchService: SearchService) {
+  constructor(private movieService: MovieService, private searchService: SearchService) {
     this.search = this.searchService.createSearchStream();
   }
 
