@@ -6,4 +6,7 @@
     <p class="my-library-page__description">
         Твоя личная библиотека произведений
     </p>
+
+    <app-category-selector [options]="listStatuses" [selected]="selectedStatus"
+        (selectedChange)="selectedStatus = $event" />
 </div>

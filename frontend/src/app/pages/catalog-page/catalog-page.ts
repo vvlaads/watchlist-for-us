@@ -6,9 +6,11 @@ import { finalize } from 'rxjs';
 import { Search } from '../../shared/components/search/search';
 import { SearchService } from '../../services/search-service';
 import { FilterList } from '../../shared/components/filter-list/filter-list';
+import { SelectOption } from '../../interfaces/SelectiOption';
+import { CategorySelector } from '../../shared/components/category-selector/category-selector';
 
 @Component({
-  imports: [MovieList, Search, FilterList],
+  imports: [MovieList, Search, FilterList, CategorySelector],
   selector: 'app-catalog-page',
   styleUrl: './catalog-page.scss',
   templateUrl: './catalog-page.html',
@@ -18,6 +20,14 @@ export class CatalogPage implements OnInit {
   public movies: WritableSignal<Movie[]> = signal([]);
 
   private search;
+
+  public selectedType = 'ALL';
+  public movieTypes: SelectOption[] = [
+    { value: 'ALL', label: 'Все' },
+    { value: 'ANIME', label: 'Аниме' },
+    { value: 'FILM', label: 'Фильмы' },
+    { value: 'CARTOON', label: 'Мультфильмы' }
+  ];
 
   constructor(private movieService: MovieService, private searchService: SearchService) {
     this.search = this.searchService.createSearchStream();

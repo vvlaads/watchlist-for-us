@@ -13,6 +13,11 @@
                 <app-search (searchChange)="onSearchChange($event)" />
             </div>
 
+            <div style="margin-bottom: 20px;">
+                <app-category-selector [options]="movieTypes" [selected]="selectedType"
+                    (selectedChange)="selectedType = $event" />
+            </div>
+
             <app-movie-list [movies]="movies()" [loading]="loading()" />
         </div>
 
