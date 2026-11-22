@@ -37,7 +37,11 @@ export class ModerationMoviesPage implements OnInit {
   public loadMovies(search = ''): void {
     this.loading.set(true);
 
-    this.movieService.getMovies(0, 20, search).subscribe({
+    this.movieService.getMovies({
+      page: 0,
+      size: 20,
+      search,
+    }).subscribe({
       next: response => {
         this.movies.set(response.content);
         this.loading.set(false);

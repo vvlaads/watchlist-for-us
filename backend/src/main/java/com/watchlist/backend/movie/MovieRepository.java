@@ -9,12 +9,21 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface MovieRepository extends JpaRepository<Movie, UUID> {
-    @Query("""
-            SELECT m
-            FROM Movie m
-            WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :search, '%'))
-            """)
-    Page<Movie> searchMovies(
-            @Param("search") String search,
-            Pageable pageable);
+        @Query("""
+                        SELECT m FROM Movie m
+                        WHERE (:type IS NULL OR m.type = :type)
+                        """)
+        Page<Movie> findByType(
+                        @Param("type") MovieType type,
+                        Pageable pageable);
+
+        @Query("""
+                        SELECT m FROM Movie m
+                        WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :search, '%'))
+                        AND (:type IS NULL OR m.type = :type)
+                        """)
+        Page<Movie> searchMovies(
+                        @Param("search") String search,
+                        @Param("type") MovieType type,
+                        Pageable pageable);
 }

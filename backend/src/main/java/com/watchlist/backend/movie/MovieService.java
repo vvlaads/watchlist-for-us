@@ -65,33 +65,16 @@ public class MovieService {
                         HttpStatus.NOT_FOUND, "Movie not found"));
     }
 
-    public Page<MovieResponse> getPopularMovies(String search, Pageable pageable) {
+    public Page<MovieResponse> getMovies(String search, MovieType type, Pageable pageable) {
         Page<Movie> movies;
 
         if (search == null || search.isBlank()) {
-            movies = movieRepository.findAll(pageable);
+            movies = type == null
+                    ? movieRepository.findAll(pageable)
+                    : movieRepository.findByType(type, pageable);
         } else {
-            movies = movieRepository.searchMovies(search.trim(), pageable);
+            movies = movieRepository.searchMovies(search.trim(), type, pageable);
         }
-
-        List<UUID> movieIds = movies.getContent()
-                .stream()
-                .map(Movie::getUuid)
-                .toList();
-
-        Map<UUID, RatingResponse> ratings = movieRatingService.getMovieRatings(movieIds);
-
-        return movies.map(movie -> {
-            RatingResponse rating = ratings.getOrDefault(
-                    movie.getUuid(),
-                    new RatingResponse(0.0, 0L));
-
-            return toResponse(movie, rating);
-        });
-    }
-
-    public Page<MovieResponse> getRecommendedMovies(Pageable pageable) {
-        Page<Movie> movies = movieRepository.findAll(pageable);
 
         List<UUID> movieIds = movies.getContent()
                 .stream()

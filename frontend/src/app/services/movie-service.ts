@@ -1,9 +1,10 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Page } from '../interfaces/Page';
 import { Movie } from '../interfaces/Movie';
 import { AuthService } from './auth-service';
 import { Observable, switchMap } from 'rxjs';
+import { MovieQueryParams } from '../interfaces/MovieQueryParams';
 
 @Injectable({
     providedIn: 'root'
@@ -17,21 +18,35 @@ export class MovieService {
         return this.http.get<Movie>(`${this.apiUrl}/${uuid}`)
     }
 
-    public getMovies(page: number, size: number, search = '') {
-        return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
-            params: { page, size, search }
-        });
-    }
+    public getMovies(params: MovieQueryParams): Observable<Page<Movie>> {
+        let httpParams = new HttpParams();
 
-    public getPopularMovies(page: number, size: number, search = '') {
-        return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
-            params: { page, size, search }
-        });
-    }
+        if (params.search) {
+            httpParams = httpParams.set('search', params.search);
+        }
 
-    public getRecommendedMovies(page: number, size: number, search = '') {
-        return this.http.get<Page<Movie>>(`${this.apiUrl}/recommended`, {
-            params: { page, size, search }
+        if (params.type) {
+            httpParams = httpParams.set('type', params.type);
+        }
+
+        if (params.genres?.length) {
+            httpParams = httpParams.set('genres', params.genres.join(','));
+        }
+
+        if (params.sortBy) {
+            httpParams = httpParams.set('sortBy', params.sortBy);
+        }
+
+        if (params.sortDirection) {
+            httpParams = httpParams.set('sortDirection', params.sortDirection);
+        }
+
+        httpParams = httpParams
+            .set('page', params.page ?? 0)
+            .set('size', params.size ?? 20);
+
+        return this.http.get<Page<Movie>>(this.apiUrl, {
+            params: httpParams
         });
     }
 

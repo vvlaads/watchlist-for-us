@@ -21,7 +21,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.watchlist.backend.movie.dto.MovieResponse;
 
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
@@ -33,10 +32,13 @@ public class MovieController {
         this.movieService = movieService;
     }
 
-    @GetMapping("/popular")
-    public ResponseEntity<Page<MovieResponse>> getPopularMovies(@RequestParam(required = false) String search,
+    @GetMapping
+    public ResponseEntity<Page<MovieResponse>> getMovies(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) MovieType type,
             Pageable pageable) {
-        return ResponseEntity.ok(movieService.getPopularMovies(search, pageable));
+
+        return ResponseEntity.ok(movieService.getMovies(search, type, pageable));
     }
 
     @GetMapping("/{id}")

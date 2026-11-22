@@ -11,7 +11,7 @@ import { CategorySelector } from '../../shared/components/category-selector/cate
 export class MyLibraryPage {
   public selectedStatus = 'ALL';
 
-  public listStatuses: SelectOption[] = [
+  public listStatuses: SelectOption<string>[] = [
     { value: 'ALL', label: 'Все' },
     { value: 'PLANNED', label: 'Хочу посмотреть' },
     { value: 'WATCHING', label: 'Смотрю' },

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { GenreSelector } from '../genre-selector/genre-selector';
 
 @Component({
-  imports: [GenreSelector],
+  imports: [],
   selector: 'app-filter-list',
   styleUrl: './filter-list.scss',
   templateUrl: './filter-list.html',

@@ -6,6 +6,8 @@ import { FilterList } from '../../shared/components/filter-list/filter-list';
 import { Movie } from '../../interfaces/Movie';
 import { MovieService } from '../../services/movie-service';
 import { SearchService } from '../../services/search-service';
+import { MovieType } from '../../interfaces/MovieType';
+import { SelectOption } from '../../interfaces/SelectiOption';
 
 @Component({
   imports: [Search, MovieList, FilterList],
@@ -18,6 +20,15 @@ export class TogetherPage {
 
   public loading: WritableSignal<boolean> = signal(true);
   public movies: WritableSignal<Movie[]> = signal([]);
+
+  public selectedType = signal<MovieType | null>(null);
+
+  public movieTypes: SelectOption<MovieType | null>[] = [
+    { value: null, label: 'Все' },
+    { value: MovieType.ANIME, label: 'Аниме' },
+    { value: MovieType.FILM, label: 'Фильмы' },
+    { value: MovieType.CARTOON, label: 'Мультфильмы' }
+  ];
 
   private search;
 
@@ -40,7 +51,12 @@ export class TogetherPage {
   public loadMovies(search = ''): void {
     this.loading.set(true);
 
-    this.movieService.getMovies(0, 20, search).subscribe({
+    this.movieService.getMovies({
+      page: 0,
+      size: 20,
+      search,
+      type: this.selectedType() ?? undefined
+    }).subscribe({
       next: response => {
         this.movies.set(response.content);
         this.loading.set(false);
