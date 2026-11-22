@@ -1,0 +1,18 @@
+<div class="moderation-movies-page">
+    <h1 class="moderation-movies-page__title">
+        Управление каталогом
+    </h1>
+    <p class="moderation-movies-page__description">
+        Редактирование содержания каталога и добавление новых произведений
+    </p>
+
+    <div class="moderation-movies-page__actions">
+        <app-search />
+
+        <a routerLink="/moderation/movies/new" class="button button--primary-dark">
+            Добавить произведение
+        </a>
+    </div>
+
+    <app-movie-list [movies]="movies()" [loading]="loading()" [link]="'/moderation/movies'" />
+</div>

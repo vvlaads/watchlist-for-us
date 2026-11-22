@@ -1,1 +1,76 @@
-<p>movie-form works!</p>
+<form [formGroup]="movieForm" (ngSubmit)="submit()" class="movie-form">
+    <div class="movie-form__poster-container">
+        <input #fileInput type="file" accept="image/*" hidden (change)="onFileSelected($event)" />
+
+        <button type="button" class="movie-form__poster" [class.movie-form__poster--dragging]="isDragging"
+            [class.movie-form__poster--selected]="previewUrl" (click)="fileInput.click()"
+            (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+            @if (previewUrl) {
+            <img [src]="previewUrl" alt="Предпросмотр постера" class="movie-form__poster-image" />
+            } @else {
+            <div class="movie-form__poster-hint">
+                <img src="/assets/icons/Star.svg" class="movie-form__poster-hint-icon" />
+                <span class="movie-form__poster-placeholder">
+                    Выберите изображение
+                </span>
+                <span class="movie-form__poster-hint">
+                    Или перетащите его сюда
+                </span>
+            </div>
+            }
+        </button>
+
+        @if (previewUrl) {
+        <button type="button" class="button movie-form__poster-change" (click)="fileInput.click()">
+            Изменить изображение
+        </button>
+        }
+    </div>
+
+    <div class="movie-form__info">
+        <input type="text" placeholder="Название фильма" formControlName="name" />
+
+        <input type="number" placeholder="Год релиза" formControlName="releaseYear" />
+
+        <select formControlName="type">
+            <option value="" disabled>Тип</option>
+            @for (type of movieTypes.keys(); track type){
+            <option [value]="type">{{movieTypes.get(type)?.label}}</option>
+            }
+        </select>
+
+        <textarea placeholder="Добавьте описание" class="movie-form__info-description"
+            formControlName="description"></textarea>
+    </div>
+
+    <div class="movie-form__genres">
+        <h2>Жанры</h2>
+
+        <app-genre-selector [genres]="genres" [selected]="movieForm.controls['genres'].value"
+            (selectedChange)="onGenresChange($event)" class="movie-form__genres-list" />
+
+
+        <div class="movie-form__form-group">
+            <label class="movie-form__form-group-label">
+                Основной жанр:
+            </label>
+
+            <select formControlName="primaryGenre">
+                @for (genre of selectedGenres; track genre.genre) {
+                <option [ngValue]="genre.genre">
+                    {{ genre.label }}
+                </option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="movie-form__actions">
+        <button type="submit" class="button button--primary-dark">
+            Сохранить
+        </button>
+        <button type="button" class="button" (click)="cancel()">
+            Отмена
+        </button>
+    </div>
+</form>

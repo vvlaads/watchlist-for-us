@@ -1,0 +1,15 @@
+<div class="movie-list">
+    @if (loading){
+    <app-loading />
+    }
+    @else {
+    @if (movies.length > 0){
+    @for(movie of movies; track movie.uuid){
+    <app-movie-card [movie]="movie" class="movie-list__card" [link]="link +'/'+ movie.uuid" />
+    }}
+    @else {
+    <div class="movie-list__empty">
+        Не удалось ничего найти
+    </div>
+    }}
+</div>

@@ -1,0 +1,4 @@
+export const MOVIE_MAX_NAME_LENGTH = 500;
+export const MOVIE_MAX_DESCRIPTION_LENGTH = 2000;
+export const MOVIE_MIN_RELEASE_YEAR = 1800;
+export const MOVIE_MAX_RELEASE_YEAR = 2100;

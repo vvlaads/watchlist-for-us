@@ -51,12 +51,13 @@ public class MovieController {
     }
 
     @PreAuthorize("hasRole('MODERATOR')")
-    @PutMapping("/{id}")
+    @PutMapping(value = "/{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<MovieResponse> updateMovie(
             @PathVariable UUID id,
-            @RequestBody Movie movie) {
+            @RequestPart("movie") Movie movie,
+            @RequestPart(value = "poster", required = false) MultipartFile poster) throws IOException {
 
-        return ResponseEntity.ok(movieService.updateMovie(id, movie));
+        return ResponseEntity.ok(movieService.updateMovie(id, movie, poster));
     }
 
     @PreAuthorize("hasRole('MODERATOR')")

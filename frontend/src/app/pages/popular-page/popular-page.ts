@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../interfaces/Movie';
 import { PosterService } from '../../services/poster-service';
-import { MovieCard } from '../../components/movie-card/movie-card';
+import { MovieCard } from '../../shared/components/movie-card/movie-card';
 
 @Component({
   imports: [MovieCard],

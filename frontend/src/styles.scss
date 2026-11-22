@@ -27,6 +27,10 @@
     --font-size-big: clamp(14px, 1.5vw, 30px);
 
     --poster-ratio: 4/6;
+
+    --border-radius-small: 10px;
+    --border-radius-default: 15px;
+    --border-radius-big: 20px;
 }
 
 * {
@@ -55,10 +59,12 @@ h4 {
 
 h1 {
     font-size: clamp(28px, 4vw, 42px);
+    margin-bottom: clamp(5px, 1vw, 20px);
 }
 
 h2 {
     font-size: clamp(18px, 2.5vw, 35px);
+    margin-bottom: clamp(4px, 0.5vw, 10px);
 }
 
 h3 {
@@ -83,15 +89,18 @@ button {
     border: none;
     font: inherit;
     cursor: pointer;
+    padding: 0;
 }
 
 .button {
     cursor: pointer;
     width: 100%;
-    border-radius: 20px;
+    border-radius: var(--border-radius-default);
     padding: 10px;
     border: 1px solid var(--color-border);
     background-color: var(--color-surface);
+    display: flex;
+    justify-content: center;
 
     &:hover {
         background-color: var(--color-surface-hover);
@@ -121,7 +130,7 @@ textarea,
 select {
     width: 100%;
     border: 1px solid var(--color-border);
-    border-radius: 10px;
+    border-radius: var(--border-radius-default);
     padding: 10px 12px;
     background: var(--color-surface);
     color: var(--color-text);

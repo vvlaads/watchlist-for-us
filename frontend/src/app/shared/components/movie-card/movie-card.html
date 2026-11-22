@@ -1,4 +1,5 @@
-<a class="movie-card" [class.movie-card--empty]="!movie" [routerLink]="`/movies/${movie?.uuid}`">
+<a class="movie-card" [class.movie-card--empty]="!movie"
+    [routerLink]="link ?? (movie ? '/movies/' + movie.uuid : null)">
     @if(movie){
     <div class="movie-card__poster">
         @if (movie.posterKey){
@@ -10,8 +11,8 @@
         <div class="movie-card__poster--rating">
             ⭐{{movie.averageRating}}/10
         </div>
-        <div class="movie-card__poster--type" [ngStyle]="typeStyles[movie.type]">
-            {{ typeStyles[movie.type].label }}
+        <div class="movie-card__poster--type" [ngStyle]="movieTypes.get(movie.type)">
+            {{ movieTypes.get(movie.type)?.label }}
         </div>
     </div>
 

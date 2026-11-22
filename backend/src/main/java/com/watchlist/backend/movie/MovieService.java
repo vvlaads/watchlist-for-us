@@ -121,13 +121,20 @@ public class MovieService {
         return toResponse(movie, rating);
     }
 
-    public MovieResponse updateMovie(UUID id, Movie newMovie) {
+    public MovieResponse updateMovie(UUID id, Movie newMovie, MultipartFile poster) throws IOException {
         Movie oldMovie = findMovieById(id);
 
-        oldMovie.setPosterKey(newMovie.getPosterKey());
         oldMovie.setName(newMovie.getName());
         oldMovie.setDescription(newMovie.getDescription());
         oldMovie.setType(newMovie.getType());
+        oldMovie.setGenres(newMovie.getGenres());
+        oldMovie.setPrimaryGenre(newMovie.getPrimaryGenre());
+        oldMovie.setReleaseYear(newMovie.getReleaseYear());
+
+        if (poster != null && !poster.isEmpty()) {
+            String newPosterKey = posterStorageService.upload(poster);
+            oldMovie.setPosterKey(newPosterKey);
+        }
 
         return toResponse(movieRepository.save(oldMovie));
     }

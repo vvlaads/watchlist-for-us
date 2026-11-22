@@ -17,6 +17,12 @@ export class MovieService {
         return this.http.get<Movie>(`${this.apiUrl}/${uuid}`)
     }
 
+    public getMovies(page: number, size: number) {
+        return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
+            params: { page, size }
+        });
+    }
+
     public getPopularMovies(page: number, size: number) {
         return this.http.get<Page<Movie>>(`${this.apiUrl}/popular`, {
             params: { page, size }
@@ -54,6 +60,25 @@ export class MovieService {
                 `/api/movies/${movieId}/rating`,
                 { rating }
             ))
+        );
+    }
+
+    public updateMovie(movieId: string, movie: object, poster: File | null) {
+        const formData = new FormData();
+
+        formData.append(
+            'movie',
+            new Blob([JSON.stringify(movie)], {
+                type: 'application/json'
+            })
+        );
+
+        if (poster) {
+            formData.append('poster', poster);
+        }
+
+        return this.authService.getCsrfToken().pipe(
+            switchMap(() => this.http.put(`${this.apiUrl}/${movieId}`, formData))
         );
     }
 }

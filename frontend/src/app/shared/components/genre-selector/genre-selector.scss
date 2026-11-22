@@ -1,0 +1,30 @@
+.genre-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+
+    &__item {
+        cursor: pointer;
+        padding: 8px 14px;
+        border: 1px solid var(--color-border);
+        border-radius: var(--border-radius-default);
+        background: var(--color-surface);
+        color: var(--color-text-secondary);
+        transition: 0.2s ease;
+
+        &:hover {
+            background: var(--color-surface-hover);
+        }
+
+        &--selected {
+            background: var(--color-primary-dark);
+            color: white;
+            border-color: var(--color-primary-dark);
+
+            &:hover {
+                background-color: var(--color-primary-dark-hover);
+            }
+        }
+    }
+}

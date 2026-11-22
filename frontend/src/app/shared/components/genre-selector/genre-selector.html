@@ -1,0 +1,8 @@
+<div class="genre-selector">
+    @for (genre of genres; track genre.genre) {
+    <button type="button" class="genre-selector__item"
+        [class.genre-selector__item--selected]="selected.includes(genre.genre)" (click)="toggleGenre(genre.genre)">
+        {{ genre.label }}
+    </button>
+    }
+</div>

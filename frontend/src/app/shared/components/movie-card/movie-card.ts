@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { Movie } from '../../interfaces/Movie';
-import { PosterService } from '../../services/poster-service';
-import { MOVIE_TYPE_STYLES } from '../../utils/movie-type-styles';
+import { Movie } from '../../../interfaces/Movie';
+import { PosterService } from '../../../services/poster-service';
 import { NgStyle } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { MOVIE_TYPES } from '../../../constants/movie-types';
+import { MovieTypeItem } from '../../../interfaces/MovieTypeItem';
 
 @Component({
   imports: [NgStyle, RouterLink],
@@ -15,7 +16,10 @@ export class MovieCard {
   @Input()
   public movie: Movie | null = null;
 
-  readonly typeStyles = MOVIE_TYPE_STYLES;
+  @Input()
+  public link: string | null = null;
+
+  public readonly movieTypes = MOVIE_TYPES;
 
   constructor(public posterService: PosterService) { }
 }

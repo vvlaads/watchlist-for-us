@@ -1,0 +1,14 @@
+.movie-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 24px;
+
+    &__card {
+        width: 100%;
+        min-width: 0;
+    }
+
+    &__empty {
+        grid-column: 1 / -1;
+    }
+}

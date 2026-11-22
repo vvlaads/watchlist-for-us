@@ -1,1 +1,10 @@
-<p>catalog-page works!</p>
+<div class="catalog-page">
+    <h1 class="catalog-page__title">
+        Каталог
+    </h1>
+    <p class="catalog-page__description">
+        Список всех произведений
+    </p>
+
+    <app-movie-list [movies]="movies()" [loading]="loading()" />
+</div>

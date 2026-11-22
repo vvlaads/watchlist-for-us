@@ -1,7 +1,8 @@
 .movie-card {
     display: flex;
     flex-direction: column;
-    width: 12vw;
+    width: 100%;
+    box-sizing: border-box;
     aspect-ratio: 4/6;
     background-color: inherit;
     border: 0;

@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../../interfaces/Movie';
 import { MovieService } from '../../services/movie-service';
 import { PosterService } from '../../services/poster-service';
-import { MovieCard } from '../../components/movie-card/movie-card';
+import { MovieCard } from '../../shared/components/movie-card/movie-card';
 import { MovieRatingModal } from '../../shared/components/movie-rating-modal/movie-rating-modal';
 
 @Component({

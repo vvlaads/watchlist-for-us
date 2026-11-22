@@ -1,1 +1,19 @@
-<p>movie-edit-page works!</p>
+<div class="movie-edit-page">
+    <h1>Редактирование фильма</h1>
+
+    @if (loading()){
+    <app-loading />
+    }
+
+    @else {
+    @if (movie(); as currentMovie){
+
+    <app-movie-form [movie]="currentMovie" />
+    }
+    @else{
+    <div class="empty">
+        Не найдено
+    </div>
+    }
+    }
+</div>
