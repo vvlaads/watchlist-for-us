@@ -1,4 +1,4 @@
-package com.watchlist.backend.controller;
+package com.watchlist.backend.auth;
 
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.web.bind.annotation.GetMapping;

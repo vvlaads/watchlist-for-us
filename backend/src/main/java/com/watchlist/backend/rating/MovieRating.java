@@ -2,7 +2,7 @@ package com.watchlist.backend.rating;
 
 import java.util.UUID;
 
-import com.watchlist.backend.entity.User;
+import com.watchlist.backend.auth.User;
 import com.watchlist.backend.movie.Movie;
 
 import jakarta.persistence.*;
@@ -18,7 +18,7 @@ import lombok.Setter;
 public class MovieRating {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uuid;
+    private UUID id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

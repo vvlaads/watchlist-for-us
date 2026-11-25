@@ -2,7 +2,7 @@
 
     <h1>Друзья</h1>
     <div class="friends-page__friend-list">
-        @for (friend of friends; track friend.uuid){
+        @for (friend of friends; track friend.id){
         <div class="friend-card">
             {{friend.username}}
         </div>

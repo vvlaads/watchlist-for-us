@@ -1,4 +1,4 @@
-package com.watchlist.backend.entity;
+package com.watchlist.backend.auth;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -15,7 +15,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uuid;
+    private UUID id;
 
     @Column(nullable = false, unique = true, length = 50)
     private String username;

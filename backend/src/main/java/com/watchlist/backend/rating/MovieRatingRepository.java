@@ -13,37 +13,37 @@ public interface MovieRatingRepository extends JpaRepository<MovieRating, UUID> 
     @Query("""
                 SELECT AVG(r.rating)
                 FROM MovieRating r
-                WHERE r.movie.uuid = :movieId
+                WHERE r.movie.id = :movieId
             """)
     Double findAverageRatingByMovieId(@Param("movieId") UUID movieId);
 
     @Query("""
                 SELECT COUNT(r)
                 FROM MovieRating r
-                WHERE r.movie.uuid = :movieId
+                WHERE r.movie.id = :movieId
             """)
     Long countByMovieId(@Param("movieId") UUID movieId);
 
     @Query("""
                 SELECT r.rating
                 FROM MovieRating r
-                WHERE r.movie.uuid = :movieId
-                AND r.user.uuid = :userId
+                WHERE r.movie.id = :movieId
+                AND r.user.id = :userId
             """)
     Optional<Integer> findUserRating(
             @Param("movieId") UUID movieId,
             @Param("userId") UUID userId);
 
-    Optional<MovieRating> findByMovieUuidAndUserUuid(UUID movieId, UUID userId);
+    Optional<MovieRating> findByMovieIdAndUserId(UUID movieId, UUID userId);
 
     @Query("""
                 SELECT
-                    r.movie.uuid AS movieId,
+                    r.movie.id AS movieId,
                     AVG(r.rating) AS averageRating,
                     COUNT(r) AS ratingCount
                 FROM MovieRating r
-                WHERE r.movie.uuid IN :movieIds
-                GROUP BY r.movie.uuid
+                WHERE r.movie.id IN :movieIds
+                GROUP BY r.movie.id
             """)
     List<MovieRatingSummary> findSummariesByMovieIds(@Param("movieIds") Collection<UUID> movieIds);
 }

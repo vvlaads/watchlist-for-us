@@ -1,4 +1,4 @@
-package com.watchlist.backend.dto;
+package com.watchlist.backend.auth;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

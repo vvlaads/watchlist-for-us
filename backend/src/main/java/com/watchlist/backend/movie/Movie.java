@@ -18,7 +18,7 @@ public class Movie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private UUID uuid;
+    private UUID id;
 
     @Column(nullable = true)
     private String posterKey;

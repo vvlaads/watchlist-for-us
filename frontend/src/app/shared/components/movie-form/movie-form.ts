@@ -147,7 +147,7 @@ export class MovieForm implements OnDestroy {
 
     if (this.currentMovie) {
       this.movieService.updateMovie(
-        this.currentMovie.uuid,
+        this.currentMovie.id,
         this.movieForm.getRawValue(),
         this.selectedFile
       ).subscribe({

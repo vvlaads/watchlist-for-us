@@ -4,8 +4,8 @@
     }
     @else {
     @if (movies.length > 0){
-    @for(movie of movies; track movie.uuid){
-    <app-movie-card [movie]="movie" class="movie-list__card" [link]="link +'/'+ movie.uuid" />
+    @for(movie of movies; track movie.id){
+    <app-movie-card [movie]="movie" class="movie-list__card" [link]="link +'/'+ movie.id" />
     }}
     @else {
     <div class="movie-list__empty">

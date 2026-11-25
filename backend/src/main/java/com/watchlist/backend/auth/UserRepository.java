@@ -1,7 +1,5 @@
 
-package com.watchlist.backend.repository;
-
-import com.watchlist.backend.entity.User;
+package com.watchlist.backend.auth;
 
 import java.util.Optional;
 import java.util.UUID;

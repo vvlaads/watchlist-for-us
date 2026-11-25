@@ -26,8 +26,8 @@ export class MovieEditPage implements OnInit {
     }
   }
 
-  private loadMovieById(uuid: string) {
-    this.movieService.getMovieById(uuid)
+  private loadMovieById(id: string) {
+    this.movieService.getMovieById(id)
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
         next: (response) => {

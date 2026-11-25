@@ -1,4 +1,4 @@
-package com.watchlist.backend.service;
+package com.watchlist.backend.auth;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;

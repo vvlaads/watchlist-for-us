@@ -1,5 +1,5 @@
 <a class="movie-card" [class.movie-card--empty]="!movie"
-    [routerLink]="link ?? (movie ? '/movies/' + movie.uuid : null)">
+    [routerLink]="link ?? (movie ? '/movies/' + movie.id : null)">
     @if(movie){
     <div class="movie-card__poster">
         @if (movie.posterKey){

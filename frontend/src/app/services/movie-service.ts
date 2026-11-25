@@ -14,8 +14,8 @@ export class MovieService {
 
     constructor(private http: HttpClient, private authService: AuthService) { }
 
-    public getMovieById(uuid: string): Observable<Movie> {
-        return this.http.get<Movie>(`${this.apiUrl}/${uuid}`)
+    public getMovieById(id: string): Observable<Movie> {
+        return this.http.get<Movie>(`${this.apiUrl}/${id}`)
     }
 
     public getMovies(params: MovieQueryParams): Observable<Page<Movie>> {

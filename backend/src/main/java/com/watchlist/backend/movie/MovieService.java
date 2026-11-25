@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import com.watchlist.backend.movie.dto.MovieMapper;
 import com.watchlist.backend.movie.dto.MovieResponse;
 import com.watchlist.backend.rating.MovieRatingService;
 import com.watchlist.backend.rating.dto.RatingResponse;
@@ -21,42 +22,14 @@ public class MovieService {
     private final MovieRepository movieRepository;
     private final PosterStorageService posterStorageService;
     private final MovieRatingService movieRatingService;
+    private final MovieMapper movieMapper;
 
     public MovieService(MovieRepository movieRepository, PosterStorageService posterStorageService,
-            MovieRatingService movieRatingService) {
+            MovieRatingService movieRatingService, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
         this.posterStorageService = posterStorageService;
         this.movieRatingService = movieRatingService;
-    }
-
-    private MovieResponse toResponse(Movie movie) {
-        RatingResponse rating = movieRatingService.getMovieRatingByMovieId(movie.getUuid());
-
-        return new MovieResponse(
-                movie.getUuid(),
-                movie.getName(),
-                movie.getDescription(),
-                movie.getPosterKey(),
-                movie.getType(),
-                rating.averageRating(),
-                rating.ratingCount(),
-                movie.getGenres(),
-                movie.getPrimaryGenre(),
-                movie.getReleaseYear());
-    }
-
-    private MovieResponse toResponse(Movie movie, RatingResponse rating) {
-        return new MovieResponse(
-                movie.getUuid(),
-                movie.getName(),
-                movie.getDescription(),
-                movie.getPosterKey(),
-                movie.getType(),
-                rating.averageRating(),
-                rating.ratingCount(),
-                movie.getGenres(),
-                movie.getPrimaryGenre(),
-                movie.getReleaseYear());
+        this.movieMapper = movieMapper;
     }
 
     private Movie findMovieById(UUID id) {
@@ -78,17 +51,17 @@ public class MovieService {
 
         List<UUID> movieIds = movies.getContent()
                 .stream()
-                .map(Movie::getUuid)
+                .map(Movie::getId)
                 .toList();
 
         Map<UUID, RatingResponse> ratings = movieRatingService.getMovieRatings(movieIds);
 
         return movies.map(movie -> {
             RatingResponse rating = ratings.getOrDefault(
-                    movie.getUuid(),
+                    movie.getId(),
                     new RatingResponse(0.0, 0L));
 
-            return toResponse(movie, rating);
+            return movieMapper.toResponse(movie, rating);
         });
     }
 
@@ -100,14 +73,16 @@ public class MovieService {
 
         Movie savedMovie = movieRepository.save(movie);
 
-        return toResponse(savedMovie);
+        RatingResponse rating = movieRatingService.getMovieRatingByMovieId(savedMovie.getId());
+
+        return movieMapper.toResponse(savedMovie, rating);
     }
 
     public MovieResponse getMovieById(UUID id) {
         Movie movie = findMovieById(id);
         RatingResponse rating = movieRatingService.getMovieRatingByMovieId(id);
 
-        return toResponse(movie, rating);
+        return movieMapper.toResponse(movie, rating);
     }
 
     public MovieResponse updateMovie(UUID id, Movie newMovie, MultipartFile poster) throws IOException {
@@ -125,7 +100,9 @@ public class MovieService {
             oldMovie.setPosterKey(newPosterKey);
         }
 
-        return toResponse(movieRepository.save(oldMovie));
+        RatingResponse rating = movieRatingService.getMovieRatingByMovieId(oldMovie.getId());
+
+        return movieMapper.toResponse(movieRepository.save(oldMovie), rating);
     }
 
     public void deleteMovie(UUID id) {

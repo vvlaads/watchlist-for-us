@@ -1,17 +1,11 @@
-package com.watchlist.backend.service;
+package com.watchlist.backend.auth;
 
 import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.watchlist.backend.dto.LoginRequest;
-import com.watchlist.backend.dto.RegisterRequest;
-import com.watchlist.backend.dto.UserResponse;
-import com.watchlist.backend.entity.User;
-import com.watchlist.backend.entity.UserRole;
 import com.watchlist.backend.exception.InvalidCredentialsException;
-import com.watchlist.backend.repository.UserRepository;
 
 @Service
 public class AuthService {
@@ -44,7 +38,7 @@ public class AuthService {
         User savedUser = userRepository.save(user);
 
         return new UserResponse(
-                savedUser.getUuid(),
+                savedUser.getId(),
                 savedUser.getUsername(),
                 savedUser.getRole());
     }
@@ -58,7 +52,7 @@ public class AuthService {
         }
 
         return new UserResponse(
-                user.getUuid(),
+                user.getId(),
                 user.getUsername(),
                 user.getRole());
     }
@@ -68,7 +62,7 @@ public class AuthService {
                 .orElseThrow(() -> new IllegalArgumentException("User not found"));
 
         return new UserResponse(
-                user.getUuid(),
+                user.getId(),
                 user.getUsername(),
                 user.getRole());
     }

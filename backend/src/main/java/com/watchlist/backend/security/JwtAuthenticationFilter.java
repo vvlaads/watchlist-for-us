@@ -16,9 +16,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.watchlist.backend.entity.User;
-import com.watchlist.backend.repository.UserRepository;
-import com.watchlist.backend.service.JwtService;
+import com.watchlist.backend.auth.JwtService;
+import com.watchlist.backend.auth.User;
+import com.watchlist.backend.auth.UserRepository;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {

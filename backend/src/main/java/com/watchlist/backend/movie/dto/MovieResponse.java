@@ -7,14 +7,14 @@ import com.watchlist.backend.movie.Genre;
 import com.watchlist.backend.movie.MovieType;
 
 public record MovieResponse(
-                UUID uuid,
-                String name,
-                String description,
-                String posterKey,
-                MovieType type,
-                Double averageRating,
-                Long ratingCount,
-                Set<Genre> genres,
-                Genre primaryGenre,
-                Integer releaseYear) {
+        UUID id,
+        String name,
+        String description,
+        String posterKey,
+        MovieType type,
+        Double averageRating,
+        Long ratingCount,
+        Set<Genre> genres,
+        Genre primaryGenre,
+        Integer releaseYear) {
 }

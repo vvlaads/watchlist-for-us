@@ -9,7 +9,7 @@
 
     <div class="together-page__friend-list">
         @if(friends.length > 0){
-        @for (friend of friends; track friend.uuid){
+        @for (friend of friends; track friend.id){
         <div class="friend-card">
             {{friend.username}}
         </div>

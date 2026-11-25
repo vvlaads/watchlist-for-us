@@ -47,7 +47,7 @@ export class MoviePage {
 
     if (currentMovie) {
       console.log(rating);
-      this.movieService.setMovieRating(currentMovie.uuid, rating).subscribe({
+      this.movieService.setMovieRating(currentMovie.id, rating).subscribe({
         next: () => {
           console.log("+");
         },

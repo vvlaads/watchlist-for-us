@@ -2,7 +2,7 @@ import { Genre } from "./Genre";
 import { MovieType } from "./MovieType";
 
 export interface Movie {
-    uuid: string;
+    id: string;
     name: string;
     description: string;
     type: MovieType;
