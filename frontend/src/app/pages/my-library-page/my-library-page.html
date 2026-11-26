@@ -8,5 +8,15 @@
     </p>
 
     <app-category-selector [options]="listStatuses" [selected]="selectedStatus"
-        (selectedChange)="selectedStatus = $event" />
+        (selectedChange)="selectListType($event)" />
+
+    <app-search (searchChange)="onSearchChange($event)" />
+
+    @if(loading()) {
+    <app-loading />
+    }
+    @else {
+    <app-movie-list [movies]="movies()" [loading]="loading()" />
+    }
+
 </div>

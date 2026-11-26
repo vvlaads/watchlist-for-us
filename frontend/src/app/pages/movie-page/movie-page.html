@@ -10,8 +10,10 @@
             <img [src]="posterService.getPosterUrl(currentMovie.posterKey)" [alt]="currentMovie.name"
                 class="movie-page__poster--image" />
 
-            <select>
-                <option>Добавить в список</option>
+            <select [value]="selectedList" (change)="addToList($event)">
+                @for (type of listTypes; track type.listType) {
+                <option [value]="type.listType">{{ type.label }}</option>
+                }
             </select>
 
             <button class="button button--primary-dark" (click)="openMovieRatingModal()">

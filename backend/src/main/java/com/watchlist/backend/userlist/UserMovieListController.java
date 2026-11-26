@@ -1,6 +1,7 @@
 package com.watchlist.backend.userlist;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -10,7 +11,10 @@ import com.watchlist.backend.userlist.dto.UserMovieListRequest;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,14 +45,16 @@ public class UserMovieListController {
                 request.listType());
     }
 
-    @GetMapping("/{listType}")
-    public List<MovieResponse> getMoviesInList(
+    @GetMapping
+    public ResponseEntity<Page<MovieResponse>> getMoviesInList(
+            @RequestParam(required = false) String search,
+            @RequestParam(required = false) MovieListType listType,
             Authentication authentication,
-            @PathVariable MovieListType listType) {
+            Pageable pageable) {
 
         UUID userId = (UUID) authentication.getPrincipal();
 
-        return userMovieListService.getMoviesInList(userId, listType);
+        return ResponseEntity.ok(userMovieListService.getMoviesInList(userId, listType, search, pageable));
     }
 
     @DeleteMapping("/{movieId}")

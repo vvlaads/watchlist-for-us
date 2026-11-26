@@ -6,6 +6,8 @@ import com.watchlist.backend.rating.dto.RatingResponse;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.watchlist.backend.auth.User;
@@ -59,19 +61,42 @@ public class UserMovieListService {
     }
 
     @Transactional(readOnly = true)
-    public List<MovieResponse> getMoviesInList(
+    public Page<MovieResponse> getMoviesInList(
             UUID userId,
-            MovieListType movieListType) {
+            MovieListType movieListType,
+            String search,
+            Pageable pageable) {
 
-        return userMovieListRepository
-                .findAllByUserIdAndListType(userId, movieListType)
-                .stream()
-                .map(userMovieList -> {
-                    Movie movie = userMovieList.getMovie();
-                    RatingResponse rating = movieRatingService.getMovieRatingByMovieId(movie.getId());
-                    return movieMapper.toResponse(movie, rating);
-                })
-                .toList();
+        Page<UserMovieList> userMovieLists;
+
+        if (search != null && !search.isBlank()) {
+            if (movieListType != null) {
+                userMovieLists = userMovieListRepository
+                        .findAllByUserIdAndListTypeAndMovie_NameContainingIgnoreCase(
+                                userId, movieListType, search, pageable);
+            } else {
+                userMovieLists = userMovieListRepository
+                        .findAllByUserIdAndMovie_NameContainingIgnoreCase(
+                                userId, search, pageable);
+            }
+        } else {
+            if (movieListType != null) {
+                userMovieLists = userMovieListRepository
+                        .findAllByUserIdAndListType(userId, movieListType, pageable);
+            } else {
+                userMovieLists = userMovieListRepository
+                        .findAllByUserId(userId, pageable);
+            }
+        }
+
+        return userMovieLists.map(userMovieList -> {
+            Movie movie = userMovieList.getMovie();
+
+            RatingResponse rating = movieRatingService
+                    .getMovieRatingByMovieId(movie.getId());
+
+            return movieMapper.toResponse(movie, rating);
+        });
     }
 
     @Transactional

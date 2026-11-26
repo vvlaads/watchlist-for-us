@@ -1,22 +1,39 @@
 package com.watchlist.backend.userlist;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserMovieListRepository extends JpaRepository<UserMovieList, UUID> {
 
-    List<UserMovieList> findAllByUserIdAndListType(
-            UUID userId,
-            MovieListType listType);
+        Page<UserMovieList> findAllByUserIdAndListType(
+                        UUID userId,
+                        MovieListType listType,
+                        Pageable pageable);
 
-    Optional<UserMovieList> findByUserIdAndMovieId(
-            UUID userId,
-            UUID movieId);
+        Page<UserMovieList> findAllByUserId(
+                        UUID userId,
+                        Pageable pageable);
 
-    void deleteByUserIdAndMovieId(
-            UUID userId,
-            UUID movieId);
+        Page<UserMovieList> findAllByUserIdAndMovie_NameContainingIgnoreCase(
+                        UUID userId,
+                        String search,
+                        Pageable pageable);
+
+        Page<UserMovieList> findAllByUserIdAndListTypeAndMovie_NameContainingIgnoreCase(
+                        UUID userId,
+                        MovieListType listType,
+                        String search,
+                        Pageable pageable);
+
+        Optional<UserMovieList> findByUserIdAndMovieId(
+                        UUID userId,
+                        UUID movieId);
+
+        void deleteByUserIdAndMovieId(
+                        UUID userId,
+                        UUID movieId);
 }
