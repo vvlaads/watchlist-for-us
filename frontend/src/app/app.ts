@@ -13,6 +13,7 @@ import { AuthModal } from './shared/components/auth-modal/auth-modal';
 export class App implements OnInit {
   protected readonly title = signal('frontend');
   private readonly authService = inject(AuthService);
+  public needAuth = false;
 
   ngOnInit(): void {
     this.authService.loadCurrentUser();

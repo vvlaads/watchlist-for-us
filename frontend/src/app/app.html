@@ -4,6 +4,8 @@
   <main class="main">
     <router-outlet />
   </main>
-</div>
 
-<app-auth-modal />
+  @if (needAuth){
+  <app-auth-modal />
+  }
+</div>

@@ -1,15 +1,20 @@
-<div class="movie-list">
-    @if (loading){
-    <app-loading />
+<div class="movie-list" #movieList>
+    @if (movies.length > 0) {
+    @for (movie of movies; track movie.id) {
+    <app-movie-card [movie]="movie" class="movie-list__card" [link]="link + '/' + movie.id" />
     }
-    @else {
-    @if (movies.length > 0){
-    @for(movie of movies; track movie.id){
-    <app-movie-card [movie]="movie" class="movie-list__card" [link]="link +'/'+ movie.id" />
-    }}
-    @else {
+    }
+    @else if (!loading) {
     <div class="movie-list__empty">
         Не удалось ничего найти
     </div>
-    }}
+    }
+
+    @if (loading) {
+    <app-loading />
+    }
+
+    @if (hasMore && !loading) {
+    <div #loadMoreTrigger class="movie-list__trigger"></div>
+    }
 </div>

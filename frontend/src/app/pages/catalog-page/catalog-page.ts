@@ -1,4 +1,4 @@
-import { Component, OnInit, signal, WritableSignal } from '@angular/core';
+import { Component, ElementRef, OnInit, signal, ViewChild, WritableSignal } from '@angular/core';
 import { MovieList } from '../../shared/components/movie-list/movie-list';
 import { MovieService } from '../../services/movie-service';
 import { Movie } from '../../interfaces/Movie';
@@ -8,6 +8,7 @@ import { FilterList } from '../../shared/components/filter-list/filter-list';
 import { SelectOption } from '../../interfaces/SelectiOption';
 import { CategorySelector } from '../../shared/components/category-selector/category-selector';
 import { MovieType } from '../../interfaces/MovieType';
+import { ROWS_ON_PAGE } from '../../constants/movie';
 
 @Component({
   imports: [MovieList, Search, FilterList, CategorySelector],
@@ -16,10 +17,16 @@ import { MovieType } from '../../interfaces/MovieType';
   templateUrl: './catalog-page.html',
 })
 export class CatalogPage implements OnInit {
-  public loading: WritableSignal<boolean> = signal(true);
   public movies: WritableSignal<Movie[]> = signal([]);
 
   public selectedType = signal<MovieType | null>(null);
+
+  public loading = signal(true);
+  public lastPage = signal(-1);
+  public hasMore = signal(true);
+  public pageSize: WritableSignal<number> = signal(10);
+
+  private currentSearch = '';
 
   public movieTypes: SelectOption<MovieType | null>[] = [
     { value: null, label: 'Все' },
@@ -38,7 +45,8 @@ export class CatalogPage implements OnInit {
     this.loadMovies();
 
     this.search.search.subscribe(query => {
-      this.loadMovies(query);
+      this.currentSearch = query;
+      this.loadMovies();
     });
   }
 
@@ -46,22 +54,23 @@ export class CatalogPage implements OnInit {
     this.search.setSearch(query);
   }
 
-  public onTypeChange(type: MovieType | null): void {
-    this.selectedType.set(type);
-    this.loadMovies();
-  }
-
-  public loadMovies(search = ''): void {
+  private loadPage(page: number): void {
     this.loading.set(true);
 
     this.movieService.getMovies({
-      page: 0,
-      size: 20,
-      search,
+      page,
+      size: this.pageSize(),
+      search: this.currentSearch,
       type: this.selectedType() ?? undefined
     }).subscribe({
       next: response => {
-        this.movies.set(response.content);
+        this.movies.update(movies => [
+          ...movies,
+          ...response.content
+        ]);
+
+        this.lastPage.set(page);
+        this.hasMore.set(!response.last);
         this.loading.set(false);
       },
       error: error => {
@@ -69,5 +78,32 @@ export class CatalogPage implements OnInit {
         this.loading.set(false);
       }
     });
+  }
+
+  public loadMovies(): void {
+    this.lastPage.set(-1);
+    this.movies.set([]);
+    this.hasMore.set(true);
+    this.loadPage(0);
+  }
+
+  public loadNextPage(): void {
+    // Не отправляем повторный запрос, пока предыдущий выполняется.
+    if (this.loading() || !this.hasMore()) return;
+
+    this.loadPage(this.lastPage() + 1);
+  }
+  public onTypeChange(type: MovieType | null): void {
+    this.selectedType.set(type);
+    this.loadMovies();
+  }
+
+  public onColumnsChange(columns: number): void {
+    const newPageSize = columns * ROWS_ON_PAGE;
+
+    if (this.pageSize() !== newPageSize) {
+      this.pageSize.set(newPageSize);
+      this.loadMovies();
+    }
   }
 }

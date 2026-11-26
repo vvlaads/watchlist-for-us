@@ -1,4 +1,9 @@
 .catalog-page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
     &__description {
         color: var(--color-text-secondary);
     }
@@ -7,5 +12,22 @@
         display: grid;
         grid-template-columns: 3fr 1fr;
         gap: 40px;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        flex-shrink: 0;
     }
 }

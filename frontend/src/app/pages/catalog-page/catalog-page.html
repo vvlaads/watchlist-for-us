@@ -1,24 +1,18 @@
 <div class="catalog-page">
-    <h1 class="catalog-page__title">
-        Каталог
-    </h1>
-
-    <p class="catalog-page__description">
-        Найди, что посмотреть
-    </p>
-
+    <h1 class="catalog-page__title">Каталог</h1>
+    <p class="catalog-page__description">Найди, что посмотреть</p>
+    
     <div class="catalog-page__content">
-        <div>
-            <div style="margin-bottom: 20px;">
+        <div class="catalog-page__main">
+            <div class="catalog-page__controls">
                 <app-search (searchChange)="onSearchChange($event)" />
-            </div>
 
-            <div style="margin-bottom: 20px;">
                 <app-category-selector [options]="movieTypes" [selected]="selectedType()"
                     (selectedChange)="onTypeChange($event)" />
             </div>
 
-            <app-movie-list [movies]="movies()" [loading]="loading()" />
+            <app-movie-list [movies]="movies()" [loading]="loading()" [hasMore]="hasMore()"
+                (columnsChange)="onColumnsChange($event)" (loadMore)="loadNextPage()" />
         </div>
 
         <app-filter-list />
